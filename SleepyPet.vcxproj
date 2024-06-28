@@ -67,6 +67,9 @@
     <Link>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
     </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule\State;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Test;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -97,53 +100,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SleepyAnimation.cpp" />
-    <ClCompile Include="SleepyBehaviorTree.cpp" />
-    <ClCompile Include="SleepyBehaviorTreeNode.cpp" />
-    <ClCompile Include="SleepyPet.cpp" />
-    <ClCompile Include="SleepyPetTest.cpp" />
-    <ClCompile Include="SleepyState.cpp" />
-    <ClCompile Include="SleepyStateDragLeft.cpp" />
-    <ClCompile Include="SleepyStateDragRight.cpp" />
-    <ClCompile Include="SleepyStateFactory.cpp" />
-    <ClCompile Include="SleepyStateFall.cpp" />
-    <ClCompile Include="SleepyStateIdle.cpp" />
-    <ClCompile Include="SleepyStateMachine.cpp" />
-    <ClCompile Include="SleepyStatePastime.cpp" />
-    <ClCompile Include="SleepyStateWalkLeft.cpp" />
-    <ClCompile Include="SleepyStateWalkRight.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="SleepyPet.h" />
-  </ItemGroup>
-  <ItemGroup>
     <QtRcc Include="Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SleepyState.h" />
+    <QtMoc Include="src\AnimationModule\State\SleepyState.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SleepyAnimation.h" />
+    <ClInclude Include="src\AnimationModule\SleepyStateFactory.h" />
+    <ClInclude Include="src\Core\AI\SleepyBehaviorTree.h" />
+    <ClInclude Include="src\Core\AI\SleepyBehaviorTreeNode.h" />
+    <QtMoc Include="src\Test\SleepyPetTest.h" />
+    <QtMoc Include="src\Test\SleepyPet.h" />
+    <QtMoc Include="src\AnimationModule\SleepyStateMachine.h" />
+    <QtMoc Include="src\AnimationModule\SleepyAnimation.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateDragLeft.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateDragRight.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateFall.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateIdle.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStatePastime.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateWalkLeft.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateWalkRight.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SleepyStateMachine.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="SleepyStateWalkRight.h" />
-    <QtMoc Include="SleepyPetTest.h" />
-    <ClInclude Include="SleepyBehaviorTree.h" />
-    <ClInclude Include="SleepyBehaviorTreeNode.h" />
-    <ClInclude Include="SleepyStateDragLeft.h" />
-    <ClInclude Include="SleepyStateDragRight.h" />
-    <ClInclude Include="SleepyStateFactory.h" />
-    <ClInclude Include="SleepyStateFall.h" />
-    <ClInclude Include="SleepyStateIdle.h" />
-    <ClInclude Include="SleepyStatePastime.h" />
-    <ClInclude Include="SleepyStateWalkLeft.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClCompile Include="src\AnimationModule\SleepyAnimation.cpp" />
+    <ClCompile Include="src\AnimationModule\SleepyStateFactory.cpp" />
+    <ClCompile Include="src\AnimationModule\SleepyStateMachine.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyState.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateDragLeft.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateDragRight.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateFall.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateIdle.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStatePastime.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateWalkLeft.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateWalkRight.cpp" />
+    <ClCompile Include="src\Core\AI\SleepyBehaviorTree.cpp" />
+    <ClCompile Include="src\Core\AI\SleepyBehaviorTreeNode.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Test\SleepyPet.cpp" />
+    <ClCompile Include="src\Test\SleepyPetTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

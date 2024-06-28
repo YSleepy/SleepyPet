@@ -53,110 +53,107 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyPet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateIdle.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateWalkLeft.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyState.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateMachine.cpp">
-      <Filter>Source Files\AnimationModule</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyAnimation.cpp">
-      <Filter>Source Files\AnimationModule</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateFactory.cpp">
-      <Filter>Source Files\AnimationModule</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyPetTest.cpp">
-      <Filter>Source Files\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateDragLeft.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateDragRight.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateFall.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStatePastime.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyBehaviorTreeNode.cpp">
-      <Filter>Source Files\Core\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyBehaviorTree.cpp">
-      <Filter>Source Files\Core\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="SleepyStateWalkRight.cpp">
-      <Filter>Source Files\AnimationModule\State</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="SleepyPet.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="SleepyAnimation.h">
-      <Filter>Header Files\AnimationModule</Filter>
-    </QtMoc>
-    <QtMoc Include="SleepyStateMachine.h">
-      <Filter>Header Files\AnimationModule</Filter>
-    </QtMoc>
-    <QtMoc Include="SleepyState.h">
-      <Filter>Header Files\AnimationModule\State</Filter>
-    </QtMoc>
-    <QtMoc Include="SleepyPetTest.h">
-      <Filter>Header Files\Test</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
     <QtRcc Include="Resource.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SleepyStateIdle.h">
+    <QtMoc Include="src\AnimationModule\State\SleepyState.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </QtMoc>
+    <QtMoc Include="src\AnimationModule\SleepyAnimation.h">
+      <Filter>Header Files\AnimationModule</Filter>
+    </QtMoc>
+    <QtMoc Include="src\AnimationModule\SleepyStateMachine.h">
+      <Filter>Header Files\AnimationModule</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Test\SleepyPet.h">
+      <Filter>Header Files\Test</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Test\SleepyPetTest.h">
+      <Filter>Header Files\Test</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateDragLeft.h">
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClInclude>
-    <ClInclude Include="SleepyStateWalkLeft.h">
+    <ClInclude Include="src\AnimationModule\State\SleepyStateDragRight.h">
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClInclude>
-    <ClInclude Include="SleepyStateFactory.h">
+    <ClInclude Include="src\AnimationModule\State\SleepyStateFall.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateIdle.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStatePastime.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateWalkLeft.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateWalkRight.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\SleepyStateFactory.h">
       <Filter>Header Files\AnimationModule</Filter>
     </ClInclude>
-    <ClInclude Include="SleepyStateDragLeft.h">
-      <Filter>Header Files\AnimationModule\State</Filter>
-    </ClInclude>
-    <ClInclude Include="SleepyStateDragRight.h">
-      <Filter>Header Files\AnimationModule\State</Filter>
-    </ClInclude>
-    <ClInclude Include="SleepyStateFall.h">
-      <Filter>Header Files\AnimationModule\State</Filter>
-    </ClInclude>
-    <ClInclude Include="SleepyStatePastime.h">
-      <Filter>Header Files\AnimationModule\State</Filter>
-    </ClInclude>
-    <ClInclude Include="SleepyBehaviorTreeNode.h">
+    <ClInclude Include="src\Core\AI\SleepyBehaviorTree.h">
       <Filter>Header Files\Core\AI</Filter>
     </ClInclude>
-    <ClInclude Include="SleepyBehaviorTree.h">
+    <ClInclude Include="src\Core\AI\SleepyBehaviorTreeNode.h">
       <Filter>Header Files\Core\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="SleepyStateWalkRight.h">
-      <Filter>Header Files\AnimationModule\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClCompile Include="src\AnimationModule\State\SleepyState.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateDragLeft.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateDragRight.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateFall.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateIdle.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStatePastime.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateWalkLeft.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateWalkRight.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\SleepyAnimation.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\SleepyStateFactory.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\SleepyStateMachine.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\AI\SleepyBehaviorTree.cpp">
+      <Filter>Source Files\Core\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\AI\SleepyBehaviorTreeNode.cpp">
+      <Filter>Source Files\Core\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test\SleepyPet.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Test\SleepyPetTest.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
