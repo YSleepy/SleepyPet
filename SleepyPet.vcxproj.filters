@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Translation Files">
+      <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
+      <Extensions>ts</Extensions>
+    </Filter>
+    <Filter Include="Header Files\AnimationModule">
+      <UniqueIdentifier>{089be3d7-03dc-46a3-bfe5-d6760b309d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AnimationModule\State">
+      <UniqueIdentifier>{87221ed3-63ab-488a-bba0-ecbbbaba0bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AnimationModule">
+      <UniqueIdentifier>{77afb04b-fc95-494d-a596-8df890011e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AnimationModule\State">
+      <UniqueIdentifier>{7c716572-a592-4df5-b3d0-5f79854bec1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Test">
+      <UniqueIdentifier>{3933d5c6-dc90-494d-816d-b2b492d58e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Test">
+      <UniqueIdentifier>{fe3baa73-1161-4c37-890b-ea5580a01ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{8b54dcac-6920-4b7a-815c-e8ccc5c3f839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{918d21d4-7434-490a-b62a-ba9910bf82e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\AI">
+      <UniqueIdentifier>{f056f6c3-9b7f-44e9-82aa-fbdf3952f683}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\AI">
+      <UniqueIdentifier>{7a42e313-323a-4e85-a3d6-ccdf8a64ce68}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyPet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateIdle.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateWalkLeft.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyState.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateMachine.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyAnimation.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateFactory.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyPetTest.cpp">
+      <Filter>Source Files\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateDragLeft.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateDragRight.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateFall.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStatePastime.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyBehaviorTreeNode.cpp">
+      <Filter>Source Files\Core\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyBehaviorTree.cpp">
+      <Filter>Source Files\Core\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="SleepyStateWalkRight.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="SleepyPet.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SleepyAnimation.h">
+      <Filter>Header Files\AnimationModule</Filter>
+    </QtMoc>
+    <QtMoc Include="SleepyStateMachine.h">
+      <Filter>Header Files\AnimationModule</Filter>
+    </QtMoc>
+    <QtMoc Include="SleepyState.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </QtMoc>
+    <QtMoc Include="SleepyPetTest.h">
+      <Filter>Header Files\Test</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SleepyStateIdle.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStateWalkLeft.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStateFactory.h">
+      <Filter>Header Files\AnimationModule</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStateDragLeft.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStateDragRight.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStateFall.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStatePastime.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyBehaviorTreeNode.h">
+      <Filter>Header Files\Core\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyBehaviorTree.h">
+      <Filter>Header Files\Core\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SleepyStateWalkRight.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+</Project>
