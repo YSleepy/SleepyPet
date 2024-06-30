@@ -66,10 +66,10 @@ private:
 
 	void startMoveToBottom();
 	void stopBehavior();
-	NodeStatus moveLeft();
-	NodeStatus moveRight();
-	NodeStatus idle();
-	NodeStatus climbWall();
+	ENodeStatus moveLeft();
+	ENodeStatus moveRight();
+	ENodeStatus idle();
+	ENodeStatus climbWall();
 
 private slots:
 

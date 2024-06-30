@@ -3,14 +3,16 @@
 
 #include "SleepyBehaviorTreeNode.h"
 
-class SleepyBehaviorTree
+class SleepyBehaviorTree:public QObject
 {
 public:
 	SleepyBehaviorTree(std::shared_ptr<SleepyBehaviorTreeNode> root);
 
-	void update();
+	void tick();
 
 private:
-	std::shared_ptr<SleepyBehaviorTreeNode> rootNode;
+	SleepyBehaviorTreeNode* rootNode;
+	SleepyBehaviorTreeNode* currentNode;
+	
 };
 

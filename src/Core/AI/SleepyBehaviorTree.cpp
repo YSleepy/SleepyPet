@@ -5,7 +5,7 @@ SleepyBehaviorTree::SleepyBehaviorTree(std::shared_ptr<SleepyBehaviorTreeNode> r
 	
 }
 
-void SleepyBehaviorTree::update()
+void SleepyBehaviorTree::tick()
 {
 	if (rootNode) {
 		rootNode->tick();

@@ -3,80 +3,116 @@
 #include <memory>
 #include <random>
 #include <vector>
+#include <QWidget>
 
-enum class NodeStatus { Success, Failure, Running };
+//节点运行状态,成功，失败，运行中，终止，无效
+enum class ENodeStatus { Success, Failure, Running, Aborted, Invalid };
 
-class SleepyBehaviorTreeNode
+//AI行为树节点基类
+class SleepyBehaviorTreeNode :public QObject
 {
 public:
 
-	virtual ~SleepyBehaviorTreeNode() = default;
-	virtual NodeStatus tick() = 0;
+	explicit SleepyBehaviorTreeNode(QObject* parent = nullptr) :QObject(parent){}
+	~SleepyBehaviorTreeNode() override = default;
+
+	bool isRunning() const { return status == ENodeStatus::Running; }
+	bool isFailure() const { return status == ENodeStatus::Failure; }
+	bool isSuccess() const { return status == ENodeStatus::Success; }
+	bool isTerminated() const { return status == ENodeStatus::Aborted; }
+
+	virtual ENodeStatus tick();
+	virtual void addChild(SleepyBehaviorTreeNode* child){}
+	void reSet(){status = ENodeStatus::Invalid;}
+	void Abort()
+	{
+		OnTerminate();
+		status = ENodeStatus::Aborted;
+	}
+
+protected:
+	virtual void OnInitialize() {}
+	virtual void OnTerminate() {}
+	virtual ENodeStatus OnUpdate() = 0;
+
+protected:
+	ENodeStatus status = ENodeStatus::Invalid;
 };
 
-class SleepySequenceNode : public SleepyBehaviorTreeNode {
+class CompositeNode : public SleepyBehaviorTreeNode
+{
 public:
-	void addChild(const std::shared_ptr<SleepyBehaviorTreeNode> child) {
-		children.push_back(child);
+	CompositeNode(QObject* parent = nullptr)
+	:SleepyBehaviorTreeNode(parent),
+	children(new std::vector<SleepyBehaviorTreeNode*>())
+	{
+		
 	}
-	NodeStatus tick() override {
-		for (auto& child : children) {
-			NodeStatus status = child->tick();
-			if (status != NodeStatus::Success) {
-				return status;
-			}
-		}
-		return NodeStatus::Success;
-	}
+	virtual void removeChild(SleepyBehaviorTreeNode* child);
+	void clearChildren()const;
+	void addChild(SleepyBehaviorTreeNode* child)override;
 
-private:
-	std::vector<std::shared_ptr<SleepyBehaviorTreeNode>> children;
+protected:
+	std::vector<SleepyBehaviorTreeNode*>* children;
 };
 
-class SelectorNode : public SleepyBehaviorTreeNode {
-public:
-	void addChild(std::shared_ptr<SleepyBehaviorTreeNode> child) {
-		children.push_back(child);
-	}
-	NodeStatus tick() override {
-		for (auto& child : children) {
-			NodeStatus status = child->tick();
-			if (status == NodeStatus::Success) {
-				return status;
-			}
-		}
-		return NodeStatus::Failure;
-	}
-
-private:
-	std::vector<std::shared_ptr<SleepyBehaviorTreeNode>> children;
+class SelectorNode : public CompositeNode
+{
+	
 };
 
-
+//////////////////////////////////////////////////////////////////
 class ActionNode : public SleepyBehaviorTreeNode {
 public:
-	ActionNode(std::function<NodeStatus()> action) : action(std::move(action)) {}
+	ActionNode(std::function<ENodeStatus()> action, SleepyBehaviorTreeNode* nextNode = nullptr , QObject* parent = nullptr)
+	: SleepyBehaviorTreeNode(parent),
+	action(std::move(action)),
+	nextNode(nextNode)
+	{
+		
+	}
 
-	NodeStatus tick() override {
+	ENodeStatus tick() override {
 		return action();
 	}
 
 private:
-	std::function<NodeStatus()> action;
+	std::function<ENodeStatus()> action;
+	SleepyBehaviorTreeNode* nextNode ;
 };
+
+class SleepySequenceNode : public SleepyBehaviorTreeNode {
+public:
+	void addChild(SleepyBehaviorTreeNode* child) {
+		children.push_back(child);
+	}
+	ENodeStatus tick() override {
+		for (auto& child : children) {
+			ENodeStatus status = child->tick();
+			if (status != ENodeStatus::Success) {
+				return status;
+			}
+		}
+		return ENodeStatus::Success;
+	}
+
+private:
+	std::vector<SleepyBehaviorTreeNode*> children;
+};
+
 
 class RandomActionNode : public SleepyBehaviorTreeNode {
 public:
-	RandomActionNode(std::initializer_list<std::function<NodeStatus()>> actions) : actions(actions) {}
+	RandomActionNode(std::initializer_list<ActionNode*> actions) : actions(actions) {}
 
-	NodeStatus tick() override {
+	ENodeStatus tick() override {
 		// 随机选择一个动作执行
 		const int index = std::uniform_int_distribution<int>(0, actions.size() - 1)(generator);
-		const NodeStatus re = actions[index]();
+		const ENodeStatus re = actions[index]->tick();
 		return re;
 	}
 
 private:
-	std::vector<std::function<NodeStatus()>> actions;
+	std::vector<ActionNode*> actions;
 	std::mt19937 generator{ std::random_device{}() };
 };

@@ -51,6 +51,12 @@
     <Filter Include="Source Files\Core\AI">
       <UniqueIdentifier>{7a42e313-323a-4e85-a3d6-ccdf8a64ce68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\AI\Task">
+      <UniqueIdentifier>{b52b4a1e-f9f0-48f8-91f4-68ae5bb64a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\AI\Task">
+      <UniqueIdentifier>{9d5bd71f-8c8f-406a-82fc-eb8eb7357ebf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc">
@@ -72,6 +78,9 @@
     </QtMoc>
     <QtMoc Include="src\Test\SleepyPetTest.h">
       <Filter>Header Files\Test</Filter>
+    </QtMoc>
+    <QtMoc Include="src\Core\AI\Task\MoveNode.h">
+      <Filter>Source Files\Core\AI</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="src\Core\AI\SleepyBehaviorTreeNode.h">
       <Filter>Header Files\Core\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\AI\Task\MoveNode.h">
+      <Filter>Header Files\Core\AI\Task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\AI\Task\MoveNode.cpp">
+      <Filter>Source Files\Core\AI\Task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

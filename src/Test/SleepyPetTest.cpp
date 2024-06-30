@@ -57,7 +57,7 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	auto root = std::make_shared<SelectorNode>();
 
 	// 添加随机动作节点，包含左移、停留、右移和爬墙动作
-	root->addChild(std::make_shared<RandomActionNode>(std::initializer_list<std::function<NodeStatus()>>{
+	root->addChild(std::make_shared<RandomActionNode>(std::initializer_list<std::function<ENodeStatus()>>{
 			[this]() { return moveLeft(); },
 			[this]() { return idle(); },
 			[this]() { return moveRight(); },
@@ -142,9 +142,9 @@ void SleepyPetTest::stopBehavior()
 	behaviorComponent->stop();
 }
 
-NodeStatus SleepyPetTest::moveLeft()
+ENodeStatus SleepyPetTest::moveLeft()
 {
-	if (!bCanBehavior)return NodeStatus::Failure;
+	if (!bCanBehavior)return ENodeStatus::Failure;
 	int distance = x() - moveDistance(generator);
 	int x = qMax(0, distance);
 	int duration = moveDuration(generator);
@@ -153,12 +153,12 @@ NodeStatus SleepyPetTest::moveLeft()
 	behaviorComponent->setEndValue(QPoint(x, y()));
 	behaviorComponent->start();
 	animationStateMachine->triggerEvent(StateTransitionEvent::ToWalkLeft);
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }
 
-NodeStatus SleepyPetTest::moveRight()
+ENodeStatus SleepyPetTest::moveRight()
 {
-	if (!bCanBehavior)return NodeStatus::Failure;
+	if (!bCanBehavior)return ENodeStatus::Failure;
 	int distance = x() + moveDistance(generator);
 	int x = qMax(0, distance); 
 	int duration = moveDuration(generator);
@@ -168,25 +168,25 @@ NodeStatus SleepyPetTest::moveRight()
 	behaviorComponent->setEndValue(QPoint(x, y()));
 	behaviorComponent->start();
 	animationStateMachine->triggerEvent(StateTransitionEvent::ToWalkRight);
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }
 
-NodeStatus SleepyPetTest::idle()
+ENodeStatus SleepyPetTest::idle()
 {
-	if (!bCanBehavior)return NodeStatus::Failure;
+	if (!bCanBehavior)return ENodeStatus::Failure;
 	int duration = moveDuration(generator);
 	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	QTimer::singleShot(duration, this, []() {});
 	updateBehavior();
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }
 
-NodeStatus SleepyPetTest::climbWall()
+ENodeStatus SleepyPetTest::climbWall()
 {
-	if (!bCanBehavior)return NodeStatus::Failure;
+	if (!bCanBehavior)return ENodeStatus::Failure;
 	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	updateBehavior();
-	return NodeStatus::Success;
+	return ENodeStatus::Success;
 }
 
 inline void SleepyPetTest::playToGroundAnimation()
@@ -210,14 +210,14 @@ inline void SleepyPetTest::beginBehavior()
 {
 	bCanBehavior = true;
 	connect(behaviorComponent, &QPropertyAnimation::finished, this, &SleepyPetTest::updateBehavior);
-	behaviorTreeManager->update();
+	behaviorTreeManager->tick();
 }
 
 inline void SleepyPetTest::updateBehavior()
 {
 	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	QTimer::singleShot(4000, this, [this]() {
-		behaviorTreeManager->update(); // 执行下一个动作
+		behaviorTreeManager->tick(); // 执行下一个动作
 	});
 }
 
