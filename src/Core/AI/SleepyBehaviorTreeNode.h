@@ -39,29 +39,101 @@ protected:
 	ENodeStatus status = ENodeStatus::Invalid;
 };
 
-class CompositeNode : public SleepyBehaviorTreeNode
+/////////////////////////////////////////////////////////////
+
+//控制器基类
+class SleepyCompositeNode : public SleepyBehaviorTreeNode
 {
 public:
-	CompositeNode(QObject* parent = nullptr)
+	SleepyCompositeNode(std::initializer_list<SleepyBehaviorTreeNode*> actions,QObject* parent = nullptr)
 	:SleepyBehaviorTreeNode(parent),
-	children(new std::vector<SleepyBehaviorTreeNode*>())
-	{
-		
-	}
-	virtual void removeChild(SleepyBehaviorTreeNode* child);
-	void clearChildren()const;
+	children(new std::vector<SleepyBehaviorTreeNode*>(actions))
+	{}
+
 	void addChild(SleepyBehaviorTreeNode* child)override;
 
 protected:
 	std::vector<SleepyBehaviorTreeNode*>* children;
 };
 
-class SelectorNode : public CompositeNode
+//顺序节点
+class SleepySequenceNode : public SleepyCompositeNode {
+public:
+	using SleepyCompositeNode::SleepyCompositeNode;
+
+	void OnInitialize()override;
+	ENodeStatus OnUpdate() override;
+
+protected:
+	std::vector<SleepyBehaviorTreeNode*>::iterator currentChild ;
+};
+
+//选择节点
+class SleepySelectorNode : public SleepySequenceNode
 {
-	
+public:
+	using SleepySequenceNode::SleepySequenceNode;
+
+		ENodeStatus OnUpdate()override
+		{
+			while (true)
+			{
+				const auto status = (*currentChild)->tick();
+				if (status != ENodeStatus::Failure)
+					return status;
+				currentChild = ++currentChild;
+				if (currentChild == children->end())
+					return ENodeStatus::Failure;
+			}
+		}
+
+};
+
+//随机选择节点
+class SleepyRandomSelectorNode : public SleepySequenceNode {
+public:
+	using SleepySequenceNode::SleepySequenceNode;
+
+	ENodeStatus tick() override {
+		// 随机选择一个动作执行
+		const int index = std::uniform_int_distribution<int>(0, children->size() - 1)(generator);
+		const ENodeStatus re = (*children)[index]->tick();
+		return re;
+	}
+
+protected:
+	std::mt19937 generator{ std::random_device{}() };
 };
 
 //////////////////////////////////////////////////////////////////
+
+class SleepyDecoratorNode : SleepyBehaviorTreeNode
+{
+public:
+	SleepyDecoratorNode(SleepyBehaviorTreeNode* child, QObject* parent = nullptr)
+		:SleepyBehaviorTreeNode(parent), child(child) {}
+
+protected:
+	SleepyBehaviorTreeNode* child;
+};
+
+//重复执行节点，当limit为-1时，无限重复
+class SleepyRePeatNode : public SleepyDecoratorNode
+{
+public:
+	SleepyRePeatNode(SleepyBehaviorTreeNode* node, int limit, QObject* parent = nullptr)
+	:SleepyDecoratorNode(node), limit(limit), count(0) {}
+protected:
+	void OnInitialize()override
+	{
+		count = 0;//进入时，将次数清零
+	}
+private:
+	int limit;
+	int count;
+};
+
+/////////////////////////////////////////////////////////////////
 class ActionNode : public SleepyBehaviorTreeNode {
 public:
 	ActionNode(std::function<ENodeStatus()> action, SleepyBehaviorTreeNode* nextNode = nullptr , QObject* parent = nullptr)
@@ -81,38 +153,6 @@ private:
 	SleepyBehaviorTreeNode* nextNode ;
 };
 
-class SleepySequenceNode : public SleepyBehaviorTreeNode {
-public:
-	void addChild(SleepyBehaviorTreeNode* child) {
-		children.push_back(child);
-	}
-	ENodeStatus tick() override {
-		for (auto& child : children) {
-			ENodeStatus status = child->tick();
-			if (status != ENodeStatus::Success) {
-				return status;
-			}
-		}
-		return ENodeStatus::Success;
-	}
-
-private:
-	std::vector<SleepyBehaviorTreeNode*> children;
-};
 
 
-class RandomActionNode : public SleepyBehaviorTreeNode {
-public:
-	RandomActionNode(std::initializer_list<ActionNode*> actions) : actions(actions) {}
 
-	ENodeStatus tick() override {
-		// 随机选择一个动作执行
-		const int index = std::uniform_int_distribution<int>(0, actions.size() - 1)(generator);
-		const ENodeStatus re = actions[index]->tick();
-		return re;
-	}
-
-private:
-	std::vector<ActionNode*> actions;
-	std::mt19937 generator{ std::random_device{}() };
-};

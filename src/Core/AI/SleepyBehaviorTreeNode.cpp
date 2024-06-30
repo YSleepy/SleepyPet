@@ -10,17 +10,25 @@ ENodeStatus SleepyBehaviorTreeNode::tick()
 	return status;
 }
 
-void CompositeNode::removeChild(SleepyBehaviorTreeNode* child)
-{
-	children->remove(child);
-}
 
-void CompositeNode::clearChildren() const
-{
-	children->clear();
-}
 
-void CompositeNode::addChild(SleepyBehaviorTreeNode* child)
+void SleepyCompositeNode::addChild(SleepyBehaviorTreeNode* child)
 {
 	children->push_back(child);
+}
+
+void SleepySequenceNode::OnInitialize()
+{
+	currentChild = children->begin();//从第一个子节点开始
+}
+
+ENodeStatus SleepySequenceNode::OnUpdate()
+{
+	while (true)
+	{
+		const auto status = (*currentChild)->tick();
+		if (status != ENodeStatus::Success) return status;
+		currentChild = ++currentChild;
+		if (currentChild == children->end())return ENodeStatus::Success;
+	}
 }
