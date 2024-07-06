@@ -6,7 +6,10 @@
 #include <QMenu>
 #include <algorithm>
 
+#include "SleepyMoveNode.h"
 #include "SleepyPetTest.h"
+
+
 
 SleepyPetTest::SleepyPetTest(QWidget* parent)
 	: QWidget(parent),
@@ -54,17 +57,17 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	setAcceptDrops(true);
 
 	//初始化AI行为树
-	auto root = std::make_shared<SelectorNode>();
+	const auto root = new SleepyRandomSelectorNode();
 
 	// 添加随机动作节点，包含左移、停留、右移和爬墙动作
-	root->addChild(std::make_shared<RandomActionNode>(std::initializer_list<std::function<ENodeStatus()>>{
-			[this]() { return moveLeft(); },
-			[this]() { return idle(); },
-			[this]() { return moveRight(); },
-			[this]() { return climbWall(); }
-	}));
+	root->addChildren(std::initializer_list<SleepyBehaviorTreeNode*>{
+		new SleepyMoveNode(this),
+		new SleepyMoveNode(this, [this]() {return idle(); }),
+		new SleepyMoveNode(this, [this]() {return moveRight(); }),
+		new SleepyMoveNode(this, [this]() {return climbWall(); })
+	});
 
-	behaviorTreeManager = std::make_shared<SleepyBehaviorTree>(root);
+	behaviorTreeManager = new SleepyBehaviorTree(root);
 	beginBehavior();
 	
 }

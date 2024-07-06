@@ -1,11 +1,11 @@
 #include "SleepyBehaviorTree.h"
 
-SleepyBehaviorTree::SleepyBehaviorTree(std::shared_ptr<SleepyBehaviorTreeNode> root): rootNode(std::move(root))
+SleepyBehaviorTree::SleepyBehaviorTree(SleepyBehaviorTreeNode* root): rootNode(root)
 {
 	
 }
 
-void SleepyBehaviorTree::tick()
+void SleepyBehaviorTree::tick()const
 {
 	if (rootNode) {
 		rootNode->tick();

@@ -84,7 +84,7 @@ private:
 
 	QLabel* mainShow;
 	SleepyStateMachine* animationStateMachine;
-	std::shared_ptr<SleepyBehaviorTree> behaviorTreeManager;
+	SleepyBehaviorTree* behaviorTreeManager;
 	QPropertyAnimation* behaviorComponent;
 	QTimer* longPressTimer;
 	QMediaPlayer* mediaPlayer;

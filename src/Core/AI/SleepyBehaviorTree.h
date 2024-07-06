@@ -6,13 +6,11 @@
 class SleepyBehaviorTree:public QObject
 {
 public:
-	SleepyBehaviorTree(std::shared_ptr<SleepyBehaviorTreeNode> root);
+	SleepyBehaviorTree(SleepyBehaviorTreeNode* root);
 
-	void tick();
+	void tick()const;
 
 private:
 	SleepyBehaviorTreeNode* rootNode;
-	SleepyBehaviorTreeNode* currentNode;
-	
 };
 

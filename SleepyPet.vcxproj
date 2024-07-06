@@ -108,8 +108,8 @@
   <ItemGroup>
     <ClInclude Include="src\AnimationModule\SleepyStateFactory.h" />
     <ClInclude Include="src\Core\AI\SleepyBehaviorTree.h" />
-    <ClInclude Include="src\Core\AI\SleepyBehaviorTreeNode.h" />
-    <ClInclude Include="src\Core\AI\Task\MoveNode.h" />
+    <QtMoc Include="src\Core\AI\SleepyBehaviorTreeNode.h" />
+    <ClInclude Include="src\Core\AI\Task\SleepyMoveNode.h" />
     <QtMoc Include="src\Test\SleepyPetTest.h" />
     <QtMoc Include="src\Test\SleepyPet.h" />
     <QtMoc Include="src\AnimationModule\SleepyStateMachine.h" />
@@ -136,7 +136,7 @@
     <ClCompile Include="src\AnimationModule\State\SleepyStateWalkRight.cpp" />
     <ClCompile Include="src\Core\AI\SleepyBehaviorTree.cpp" />
     <ClCompile Include="src\Core\AI\SleepyBehaviorTreeNode.cpp" />
-    <ClCompile Include="src\Core\AI\Task\MoveNode.cpp" />
+    <ClCompile Include="src\Core\AI\Task\SleepyMoveNode.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Test\SleepyPet.cpp" />
     <ClCompile Include="src\Test\SleepyPetTest.cpp" />

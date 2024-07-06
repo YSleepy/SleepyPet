@@ -4,6 +4,7 @@
 #include <random>
 #include <vector>
 #include <QWidget>
+#include <QObject>
 
 //节点运行状态,成功，失败，运行中，终止，无效
 enum class ENodeStatus { Success, Failure, Running, Aborted, Invalid };
@@ -11,9 +12,10 @@ enum class ENodeStatus { Success, Failure, Running, Aborted, Invalid };
 //AI行为树节点基类
 class SleepyBehaviorTreeNode :public QObject
 {
+	Q_OBJECT
 public:
 
-	explicit SleepyBehaviorTreeNode(QObject* parent = nullptr) :QObject(parent){}
+	SleepyBehaviorTreeNode(QObject* parent = nullptr) :QObject(parent){}
 	~SleepyBehaviorTreeNode() override = default;
 
 	bool isRunning() const { return status == ENodeStatus::Running; }
@@ -45,12 +47,17 @@ protected:
 class SleepyCompositeNode : public SleepyBehaviorTreeNode
 {
 public:
+	SleepyCompositeNode(QObject* parent = nullptr)
+	:SleepyBehaviorTreeNode(parent),
+	children(new std::vector<SleepyBehaviorTreeNode*>()){}
+
 	SleepyCompositeNode(std::initializer_list<SleepyBehaviorTreeNode*> actions,QObject* parent = nullptr)
 	:SleepyBehaviorTreeNode(parent),
 	children(new std::vector<SleepyBehaviorTreeNode*>(actions))
 	{}
 
 	void addChild(SleepyBehaviorTreeNode* child)override;
+	void addChildren(std::initializer_list<SleepyBehaviorTreeNode*> actions)const;
 
 protected:
 	std::vector<SleepyBehaviorTreeNode*>* children;
@@ -94,9 +101,9 @@ class SleepyRandomSelectorNode : public SleepySequenceNode {
 public:
 	using SleepySequenceNode::SleepySequenceNode;
 
-	ENodeStatus tick() override {
+	ENodeStatus OnUpdate() override {
 		// 随机选择一个动作执行
-		const int index = std::uniform_int_distribution<int>(0, children->size() - 1)(generator);
+		const int index = std::uniform_int_distribution<int>(0, static_cast<int>(children->size() - 1))(generator);
 		const ENodeStatus re = (*children)[index]->tick();
 		return re;
 	}
@@ -107,7 +114,7 @@ protected:
 
 //////////////////////////////////////////////////////////////////
 
-class SleepyDecoratorNode : SleepyBehaviorTreeNode
+class SleepyDecoratorNode :public SleepyBehaviorTreeNode
 {
 public:
 	SleepyDecoratorNode(SleepyBehaviorTreeNode* child, QObject* parent = nullptr)
@@ -128,29 +135,29 @@ protected:
 	{
 		count = 0;//进入时，将次数清零
 	}
+	ENodeStatus OnUpdate()override;
 private:
 	int limit;
 	int count;
 };
 
 /////////////////////////////////////////////////////////////////
-class ActionNode : public SleepyBehaviorTreeNode {
+class SleepyActionNode : public SleepyBehaviorTreeNode {
 public:
-	ActionNode(std::function<ENodeStatus()> action, SleepyBehaviorTreeNode* nextNode = nullptr , QObject* parent = nullptr)
+	SleepyActionNode(std::function<ENodeStatus()> action, QObject* parent = nullptr)
 	: SleepyBehaviorTreeNode(parent),
-	action(std::move(action)),
-	nextNode(nextNode)
+	action(std::move(action))
 	{
 		
 	}
 
-	ENodeStatus tick() override {
+protected:
+	ENodeStatus OnUpdate() override {
 		return action();
 	}
 
 private:
 	std::function<ENodeStatus()> action;
-	SleepyBehaviorTreeNode* nextNode ;
 };
 
 
