@@ -14,7 +14,6 @@
 SleepyPetTest::SleepyPetTest(QWidget* parent)
 	: QWidget(parent),
 	mainShow(new QLabel(this)),
-	behaviorComponent(new QPropertyAnimation(this, "pos")),
 	longPressTimer(new QTimer(this)),
 	mediaPlayer(new QMediaPlayer(this)),
 	generator(std::random_device{}()),
@@ -57,17 +56,19 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	setAcceptDrops(true);
 
 	//初始化AI行为树
-	const auto root = new SleepyRandomSelectorNode();
-
+	const auto root = new SleepyRePeatNode(-1,this);
+	const auto randomSelect = new SleepyRandomSelectorNode(root);
+	root->setChild(randomSelect);
 	// 添加随机动作节点，包含左移、停留、右移和爬墙动作
-	root->addChildren(std::initializer_list<SleepyBehaviorTreeNode*>{
-		new SleepyMoveNode(this),
-		new SleepyMoveNode(this, [this]() {return idle(); }),
-		new SleepyMoveNode(this, [this]() {return moveRight(); }),
-		new SleepyMoveNode(this, [this]() {return climbWall(); })
+	randomSelect->addChildren(std::initializer_list<SleepyBehaviorTreeNode*>{
+		new SleepyMoveNode(this,randomSelect),
+		//new SleepyMoveNode(this, [this]() {return idle(); }),
+		//new SleepyMoveNode(this, [this]() {return moveRight(); }),
+		//new SleepyMoveNode(this, [this]() {return climbWall(); })
 	});
 
-	behaviorTreeManager = new SleepyBehaviorTree(root);
+
+	behaviorTreeManager = new SleepyBehaviorTree(randomSelect);
 	beginBehavior();
 	
 }
@@ -141,8 +142,8 @@ void SleepyPetTest::stopBehavior()
 {
 	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	bCanBehavior = false;
-	disconnect(behaviorComponent, &QPropertyAnimation::finished, this, &SleepyPetTest::updateBehavior);
-	behaviorComponent->stop();
+	//disconnect(behaviorComponent, &QPropertyAnimation::finished, this, &SleepyPetTest::updateBehavior);
+	//behaviorComponent->stop();
 }
 
 ENodeStatus SleepyPetTest::moveLeft()

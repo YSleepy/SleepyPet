@@ -73,6 +73,7 @@ public:
 
 protected:
 	std::vector<SleepyBehaviorTreeNode*>::iterator currentChild ;
+	std::vector<SleepyBehaviorTreeNode*>::iterator staging;
 };
 
 //选择节点
@@ -104,6 +105,7 @@ public:
 	ENodeStatus OnUpdate() override {
 		// 随机选择一个动作执行
 		const int index = std::uniform_int_distribution<int>(0, static_cast<int>(children->size() - 1))(generator);
+		currentChild = children->begin() + index;
 		const ENodeStatus re = (*children)[index]->tick();
 		return re;
 	}
@@ -117,9 +119,10 @@ protected:
 class SleepyDecoratorNode :public SleepyBehaviorTreeNode
 {
 public:
-	SleepyDecoratorNode(SleepyBehaviorTreeNode* child, QObject* parent = nullptr)
-		:SleepyBehaviorTreeNode(parent), child(child) {}
+	SleepyDecoratorNode(QObject* parent = nullptr)
+		:SleepyBehaviorTreeNode(parent), child(nullptr) {}
 
+	void setChild(SleepyBehaviorTreeNode* childNode) { this->child = childNode; }
 protected:
 	SleepyBehaviorTreeNode* child;
 };
@@ -128,8 +131,8 @@ protected:
 class SleepyRePeatNode : public SleepyDecoratorNode
 {
 public:
-	SleepyRePeatNode(SleepyBehaviorTreeNode* node, int limit, QObject* parent = nullptr)
-	:SleepyDecoratorNode(node), limit(limit), count(0) {}
+	SleepyRePeatNode(int limit, QObject* parent = nullptr)
+	:SleepyDecoratorNode(parent), limit(limit), count(0) {}
 protected:
 	void OnInitialize()override
 	{
@@ -144,12 +147,21 @@ private:
 /////////////////////////////////////////////////////////////////
 class SleepyActionNode : public SleepyBehaviorTreeNode {
 public:
+	SleepyActionNode(QObject* parent = nullptr)
+	:SleepyBehaviorTreeNode(parent),
+	action(nullptr)
+	{
+		
+	}
+
 	SleepyActionNode(std::function<ENodeStatus()> action, QObject* parent = nullptr)
 	: SleepyBehaviorTreeNode(parent),
 	action(std::move(action))
 	{
 		
 	}
+
+	void setAction(std::function<ENodeStatus()> actionFun) { this->action = std::move(actionFun); }
 
 protected:
 	ENodeStatus OnUpdate() override {

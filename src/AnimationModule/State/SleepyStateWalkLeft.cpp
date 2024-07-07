@@ -20,7 +20,7 @@ void SleepyStateWalkLeft::enter(QTimer* playAnimationTimer, QLabel* playAnimatio
 
 void SleepyStateWalkLeft::exit()
 {
-	animation->current = animation->animationBegin;
+	SleepyState::exit();
 }
 
 void SleepyStateWalkLeft::update()

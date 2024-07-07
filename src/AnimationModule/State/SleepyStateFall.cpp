@@ -21,6 +21,7 @@ void SleepyStateFall::enter(QTimer* playAnimationTimer, QLabel* playAnimationTar
 
 void SleepyStateFall::exit()
 {
+	SleepyState::exit();
 }
 
 void SleepyStateFall::update()

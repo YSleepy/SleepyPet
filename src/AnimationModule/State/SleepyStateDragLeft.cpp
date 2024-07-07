@@ -21,7 +21,7 @@ void SleepyStateDragLeft::enter(QTimer* playAnimationTimer, QLabel* playAnimatio
 
 void SleepyStateDragLeft::exit()
 {
-	animation->resetAnimation();
+	SleepyState::exit();
 }
 
 void SleepyStateDragLeft::update()

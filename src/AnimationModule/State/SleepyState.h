@@ -25,7 +25,7 @@ public:
 	SleepyState(QObject*parent,State state);
 	~SleepyState();
 	virtual void enter(QTimer* playAnimationTimer,QLabel* playAnimationTarget);
-	virtual void exit() = 0;
+	virtual void exit();
 	virtual void update() = 0;
 	State getStateType()const;
 

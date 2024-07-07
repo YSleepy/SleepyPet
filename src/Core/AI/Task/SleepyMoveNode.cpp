@@ -3,8 +3,15 @@
 
 #include <qscreen.h>
 
+SleepyMoveNode::SleepyMoveNode(QWidget* widget, QObject* parent)
+	:SleepyActionNode(parent),
+	widget_(widget)
+{
+
+}
+
 SleepyMoveNode::SleepyMoveNode(QWidget* widget, std::function<ENodeStatus()> action, QObject* parent )
-	: SleepyActionNode(action, parent),
+	: SleepyActionNode(std::move(action), parent),
 	widget_(widget)
 {
 	

@@ -1,3 +1,4 @@
+#include <QTimer>
 #include "SleepyState.h"
 
 
@@ -11,6 +12,12 @@ void SleepyState::enter(QTimer * playAnimationTimer, QLabel * playAnimationTarge
 {
 	this->playAnimationTarget = playAnimationTarget;
 	this->playAnimationTimer = playAnimationTimer;
+}
+
+void SleepyState::exit()
+{
+	this->animation->resetAnimation();
+	this->playAnimationTimer->stop();
 }
 
 State SleepyState::getStateType() const

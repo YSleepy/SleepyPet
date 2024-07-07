@@ -21,6 +21,7 @@ void SleepyStatePastime::enter(QTimer* playAnimationTimer, QLabel* playAnimation
 
 void SleepyStatePastime::exit()
 {
+	SleepyState::exit();
 }
 
 void SleepyStatePastime::update()

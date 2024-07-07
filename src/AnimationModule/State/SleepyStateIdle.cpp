@@ -22,6 +22,7 @@ void SleepyStateIdle::enter(QTimer* playAnimationTimer, QLabel* playAnimationTar
 
 void SleepyStateIdle::exit()
 {
+	SleepyState::exit();
 }
 
 void SleepyStateIdle::update()
