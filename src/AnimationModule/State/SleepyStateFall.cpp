@@ -10,10 +10,9 @@ SleepyStateFall::SleepyStateFall(QObject* parent) :SleepyState(parent, SleepySta
 	animation->setAnimationWithBedinEnd(4, 5);
 }
 
-
-void SleepyStateFall::enter(QTimer* playAnimationTimer, QLabel* playAnimationTarget)
+void SleepyStateFall::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
 {
-	SleepyState::enter(playAnimationTimer, playAnimationTarget);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget);
 
 	playAnimationTimer->callOnTimeout(this, &SleepyStateFall::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());

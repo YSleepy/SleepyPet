@@ -1,4 +1,5 @@
 #pragma once
+#include <QPropertyAnimation>
 #include <QTimer>
 #include "SleepyBehaviorTreeNode.h"
 
@@ -11,6 +12,7 @@ protected:
 	QWidget* widget_;
 	QPoint targetPos_;
 	int stepSize_ = 1;
+	QPropertyAnimation* animation_ = new QPropertyAnimation(widget_, "pos", this);
 	QTimer* timer_ = new QTimer(this);
 	bool canMove_ = true;
 

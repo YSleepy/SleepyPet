@@ -3,23 +3,11 @@
 #include <QObject>
 #include <QTimer>
 #include <QHash>
-#include<QDate>
+#include <QDate>
 
 #include "SleepyState.h"
 #include "SleepyStateFactory.h"
 
-
-enum class StateTransitionEvent
-{
-	ToWalkLeft,
-	ToWalkRight,
-	ToDragLeft,
-	ToDragRight,
-	ToFall,
-	FallToIdle,
-	ToPastime,
-	ToIdle
-};
 
 /*
  * 状态转移
@@ -61,7 +49,7 @@ class SleepyStateMachine : public QObject
 	Q_OBJECT
 
 public:
-	SleepyStateMachine(QObject *parent,QLabel* playAnimationTarget,State currentState, StateTransitionTable* (*createStateTransitionTable)());
+	SleepyStateMachine(QObject *parent,QLabel* playAnimationTarget,QWidget* widget,State currentState, StateTransitionTable* (*createStateTransitionTable)());
 	~SleepyStateMachine();
 
 	bool triggerEvent(StateTransitionEvent event);
@@ -72,6 +60,8 @@ private:
 	QTimer* playAnimationTimer;
 	SleepyState* currentState;
 	QLabel* playAnimationTarget;
+	QWidget* windows;
 	StateTransitionTable* animationStateTransitionTable;
 	QHash<State, SleepyState*>* statePool;
+	QPropertyAnimation* propertyAnimation;
 };

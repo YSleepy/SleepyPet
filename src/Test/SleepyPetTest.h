@@ -1,11 +1,10 @@
 #pragma once
 #include <QWidget>
 #include <QMediaPlayer>
-#include <QPropertyAnimation>
 #include <random>
 #include <QMouseEvent>
 
-#include "SleepyBehaviorTree.h"
+//#include "SleepyBehaviorTree.h"
 #include "SleepyStateDragLeft.h"
 #include "SleepyStateDragRight.h"
 #include "SleepyStateFall.h"
@@ -39,7 +38,7 @@ inline StateTransitionTable* createStateTransitionTable()
 	(*re)[{SleepyStateDragRight::state, StateTransitionEvent::ToDragLeft}] = SleepyStateDragLeft::state;
 	(*re)[{SleepyStateDragRight::state, StateTransitionEvent::ToFall}] = SleepyStateFall::state;
 
-	(*re)[{SleepyStateFall::state, StateTransitionEvent::FallToIdle}] = SleepyStateIdle::state;
+	(*re)[{SleepyStateFall::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 	(*re)[{SleepyStatePastime::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 
 	return re;
@@ -52,7 +51,7 @@ class SleepyPetTest : public QWidget
 public:
 
 	SleepyPetTest(QWidget* parent = nullptr);
-	virtual ~SleepyPetTest() = default ;
+	~SleepyPetTest() override = default;
 
 	bool eventFilter(QObject* watched, QEvent* event) override;
 
@@ -66,10 +65,10 @@ private:
 
 	void startMoveToBottom();
 	void stopBehavior();
-	ENodeStatus moveLeft();
-	ENodeStatus moveRight();
-	ENodeStatus idle();
-	ENodeStatus climbWall();
+	//ENodeStatus moveLeft();
+	//ENodeStatus moveRight();
+	//ENodeStatus idle();
+	//ENodeStatus climbWall();
 
 private slots:
 
@@ -77,14 +76,14 @@ private slots:
 	inline void playToGroundAnimation();
 	inline void stopMusic();
 	inline void interact();
-	inline void beginBehavior();
-	inline void updateBehavior();
+	//inline void beginBehavior();
+	//inline void updateBehavior();
 
 private:
 
 	QLabel* mainShow;
-	SleepyStateMachine* animationStateMachine;
-	SleepyBehaviorTree* behaviorTreeManager;
+	SleepyStateMachine* stateMachine;
+	//SleepyBehaviorTree* behaviorTreeManager;
 	QPropertyAnimation* behaviorComponent;
 	QTimer* longPressTimer;
 	QMediaPlayer* mediaPlayer;

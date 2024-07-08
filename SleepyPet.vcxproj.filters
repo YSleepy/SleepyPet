@@ -79,9 +79,6 @@
     <QtMoc Include="src\Test\SleepyPetTest.h">
       <Filter>Header Files\Test</Filter>
     </QtMoc>
-    <QtMoc Include="src\Core\AI\SleepyBehaviorTreeNode.h">
-      <Filter>Header Files\Core\AI</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AnimationModule\State\SleepyStateDragLeft.h">
@@ -108,11 +105,8 @@
     <ClInclude Include="src\AnimationModule\SleepyStateFactory.h">
       <Filter>Header Files\AnimationModule</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\AI\SleepyBehaviorTree.h">
-      <Filter>Header Files\Core\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\AI\Task\SleepyMoveNode.h">
-      <Filter>Header Files\Core\AI\Task</Filter>
+    <ClInclude Include="ISleepyStateTransition.h">
+      <Filter>Header Files\AnimationModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -149,12 +143,6 @@
     <ClCompile Include="src\AnimationModule\SleepyStateMachine.cpp">
       <Filter>Source Files\AnimationModule</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\AI\SleepyBehaviorTree.cpp">
-      <Filter>Source Files\Core\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\AI\SleepyBehaviorTreeNode.cpp">
-      <Filter>Source Files\Core\AI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Test\SleepyPet.cpp">
       <Filter>Source Files\Test</Filter>
     </ClCompile>
@@ -164,8 +152,8 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\AI\Task\SleepyMoveNode.cpp">
-      <Filter>Source Files\Core\AI\Task</Filter>
+    <ClCompile Include="ISleepyStateTransition.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -72,7 +72,7 @@ public:
 	ENodeStatus OnUpdate() override;
 
 protected:
-	std::vector<SleepyBehaviorTreeNode*>::iterator currentChild ;
+	std::vector<SleepyBehaviorTreeNode*>::iterator currentChild = children->end();
 	std::vector<SleepyBehaviorTreeNode*>::iterator staging;
 };
 
@@ -103,10 +103,17 @@ public:
 	using SleepySequenceNode::SleepySequenceNode;
 
 	ENodeStatus OnUpdate() override {
-		// 随机选择一个动作执行
-		const int index = std::uniform_int_distribution<int>(0, static_cast<int>(children->size() - 1))(generator);
-		currentChild = children->begin() + index;
-		const ENodeStatus re = (*children)[index]->tick();
+		ENodeStatus re = ENodeStatus::Invalid;
+		if(currentChild!= children->end && (*currentChild)->isRunning)
+		{
+			re = (*currentChild)->tick();
+		}else
+		{
+			// 随机选择一个动作执行
+			const int index = std::uniform_int_distribution<int>(0, static_cast<int>(children->size() - 1))(generator);
+			currentChild = children->begin() + index;
+			re = (*currentChild)->tick();
+		}
 		return re;
 	}
 

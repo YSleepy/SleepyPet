@@ -11,9 +11,9 @@ SleepyStateDragRight::SleepyStateDragRight(QObject* parent) :SleepyState(parent,
 }
 
 
-void SleepyStateDragRight::enter(QTimer* playAnimationTimer, QLabel* playAnimationTarget)
+void SleepyStateDragRight::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
 {
-	SleepyState::enter(playAnimationTimer, playAnimationTarget);
+	SleepyState::enter(animationTimer, animationTarget,propertyAnimation,widget);
 
 	playAnimationTimer->callOnTimeout(this, &SleepyStateDragRight::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());

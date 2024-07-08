@@ -10,10 +10,9 @@ SleepyStatePastime::SleepyStatePastime(QObject* parent) :SleepyState(parent, Sle
 	animation->setAnimationWithBedinEnd(15, 18);
 }
 
-
-void SleepyStatePastime::enter(QTimer* playAnimationTimer, QLabel* playAnimationTarget)
+void SleepyStatePastime::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
 {
-	SleepyState::enter(playAnimationTimer, playAnimationTarget);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget);
 
 	playAnimationTimer->callOnTimeout(this, &SleepyStatePastime::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());

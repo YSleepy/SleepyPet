@@ -1,12 +1,14 @@
 #include "SleepyStateMachine.h"
-#include "SleepyStateWalkLeft.h"
 
-SleepyStateMachine::SleepyStateMachine(QObject* parent, QLabel* playAnimationTarget, State currentState, StateTransitionTable* (*createStateTransitionTable)())
+
+SleepyStateMachine::SleepyStateMachine(QObject* parent, QLabel* playAnimationTarget,QWidget* widget, State currentState, StateTransitionTable* (*createStateTransitionTable)())
 	: QObject(parent),
 	playAnimationTimer(new QTimer(this)),
 	playAnimationTarget(playAnimationTarget),
+	windows(widget),
 	animationStateTransitionTable(createStateTransitionTable()),
-	statePool(new QHash<State, SleepyState*>())
+	statePool(new QHash<State, SleepyState*>()),
+	propertyAnimation(new QPropertyAnimation(windows, "pos", this))
 {
 	for (auto i = animationStateTransitionTable->begin(); i != animationStateTransitionTable->end(); ++i)
 	{
@@ -20,7 +22,7 @@ SleepyStateMachine::SleepyStateMachine(QObject* parent, QLabel* playAnimationTar
 		}
 	}
 	this->currentState = (*statePool)[currentState];
-	this->currentState->enter(playAnimationTimer, playAnimationTarget);
+	this->currentState->enter(playAnimationTimer, playAnimationTarget, propertyAnimation, windows);
 }
 
 SleepyStateMachine::~SleepyStateMachine()
@@ -33,7 +35,7 @@ bool SleepyStateMachine::triggerEvent(StateTransitionEvent event)
 	{
 		currentState->exit();
 		currentState = (*statePool)[findStateTransition.value()];
-		currentState->enter(playAnimationTimer, playAnimationTarget);
+		currentState->enter(playAnimationTimer, playAnimationTarget,propertyAnimation,windows);
 		return true;
 	}
 	return false;

@@ -10,10 +10,9 @@ SleepyStateDragLeft::SleepyStateDragLeft(QObject* parent) :SleepyState(parent, S
 	animation->setSequenceArray({6,8,10});
 }
 
-
-void SleepyStateDragLeft::enter(QTimer* playAnimationTimer, QLabel* playAnimationTarget)
+void SleepyStateDragLeft::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation,QWidget* widget)
 {
-	SleepyState::enter(playAnimationTimer, playAnimationTarget);
+	SleepyState::enter(animationTimer, animationTarget,propertyAnimation,widget);
 
 	playAnimationTimer->callOnTimeout(this, &SleepyStateDragLeft::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());

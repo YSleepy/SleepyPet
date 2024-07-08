@@ -1,4 +1,4 @@
-#include<QTimer>
+#include <QTimer>
 #include <QGraphicsDropShadowEffect>
 #include <QMimeData>
 #include <QAudioOutput>
@@ -6,7 +6,6 @@
 #include <QMenu>
 #include <algorithm>
 
-#include "SleepyMoveNode.h"
 #include "SleepyPetTest.h"
 
 
@@ -31,14 +30,14 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	mainShow->resize(128, 130);
 
 	//初始化位置
-	QScreen* screen = QGuiApplication::primaryScreen();
-	QRect screenGeometry = screen->geometry();
+	const QScreen* screen = QGuiApplication::primaryScreen();
+	const QRect screenGeometry = screen->geometry();
 	endY = screenGeometry.height() - this->height();
 	endX = 900;
 	this->move(endX, endY);
 	
-	//初始化动画状态机
-	animationStateMachine = new SleepyStateMachine(this, mainShow, State::SleepyStateIdle, createStateTransitionTable);
+	//初始化状态机
+	stateMachine = new SleepyStateMachine(this, mainShow,this, State::SleepyStateIdle, createStateTransitionTable);
 
 	//设置桌宠阴影
 	const auto shadowEffect = new QGraphicsDropShadowEffect(this);
@@ -55,22 +54,7 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	//接受拖拽文件,bug解决办法 https://blog.csdn.net/hongrui1/article/details/50696683
 	setAcceptDrops(true);
 
-	//初始化AI行为树
-	const auto root = new SleepyRePeatNode(-1,this);
-	const auto randomSelect = new SleepyRandomSelectorNode(root);
-	root->setChild(randomSelect);
-	// 添加随机动作节点，包含左移、停留、右移和爬墙动作
-	randomSelect->addChildren(std::initializer_list<SleepyBehaviorTreeNode*>{
-		new SleepyMoveNode(this,randomSelect),
-		//new SleepyMoveNode(this, [this]() {return idle(); }),
-		//new SleepyMoveNode(this, [this]() {return moveRight(); }),
-		//new SleepyMoveNode(this, [this]() {return climbWall(); })
-	});
-
-
-	behaviorTreeManager = new SleepyBehaviorTree(randomSelect);
-	beginBehavior();
-	
+	//beginBehavior();
 }
 
 
@@ -95,7 +79,7 @@ void SleepyPetTest::dropEvent(QDropEvent* event)
 			mediaPlayer->setSource(QUrl::fromLocalFile(fileName));
 			mediaPlayer->play();
 			stopBehavior();
-			animationStateMachine->triggerEvent(StateTransitionEvent::ToPastime);
+			stateMachine->triggerEvent(StateTransitionEvent::ToPastime);
 		}
 	}
 }
@@ -121,14 +105,14 @@ void SleepyPetTest::contextMenuEvent(QContextMenuEvent* event)
 void SleepyPetTest::mousePressEvent(QMouseEvent* event)
 {
 	if (!rect().contains(event->pos())) {
-		beginBehavior();
+		//beginBehavior();
 	}
 	QWidget::mousePressEvent(event);
 }
 
 void SleepyPetTest::startMoveToBottom()
 {
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToFall);
+	stateMachine->triggerEvent(StateTransitionEvent::ToFall);
 
 	QPropertyAnimation* fall = new QPropertyAnimation(this, "pos");
 	fall->setDuration(2000);  // 2秒移动到底部
@@ -140,89 +124,24 @@ void SleepyPetTest::startMoveToBottom()
 
 void SleepyPetTest::stopBehavior()
 {
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
+	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	bCanBehavior = false;
-	//disconnect(behaviorComponent, &QPropertyAnimation::finished, this, &SleepyPetTest::updateBehavior);
-	//behaviorComponent->stop();
-}
-
-ENodeStatus SleepyPetTest::moveLeft()
-{
-	if (!bCanBehavior)return ENodeStatus::Failure;
-	int distance = x() - moveDistance(generator);
-	int x = qMax(0, distance);
-	int duration = moveDuration(generator);
-	behaviorComponent->setDuration(duration);
-	behaviorComponent->setStartValue(pos());
-	behaviorComponent->setEndValue(QPoint(x, y()));
-	behaviorComponent->start();
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToWalkLeft);
-	return ENodeStatus::Success;
-}
-
-ENodeStatus SleepyPetTest::moveRight()
-{
-	if (!bCanBehavior)return ENodeStatus::Failure;
-	int distance = x() + moveDistance(generator);
-	int x = qMax(0, distance); 
-	int duration = moveDuration(generator);
-	x = std::clamp(x, 0, 1400);
-	behaviorComponent->setDuration(duration);
-	behaviorComponent->setStartValue(pos());
-	behaviorComponent->setEndValue(QPoint(x, y()));
-	behaviorComponent->start();
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToWalkRight);
-	return ENodeStatus::Success;
-}
-
-ENodeStatus SleepyPetTest::idle()
-{
-	if (!bCanBehavior)return ENodeStatus::Failure;
-	int duration = moveDuration(generator);
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
-	QTimer::singleShot(duration, this, []() {});
-	updateBehavior();
-	return ENodeStatus::Success;
-}
-
-ENodeStatus SleepyPetTest::climbWall()
-{
-	if (!bCanBehavior)return ENodeStatus::Failure;
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
-	updateBehavior();
-	return ENodeStatus::Success;
 }
 
 inline void SleepyPetTest::playToGroundAnimation()
 {
-	animationStateMachine->triggerEvent(StateTransitionEvent::FallToIdle);
-	beginBehavior();
+	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
+	//beginBehavior();
 }
 
 inline void SleepyPetTest::stopMusic()
 {
 	mediaPlayer->stop();
-	//animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
-	beginBehavior();
+	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 }
 
 inline void SleepyPetTest::interact()
 {
-}
-
-inline void SleepyPetTest::beginBehavior()
-{
-	bCanBehavior = true;
-	connect(behaviorComponent, &QPropertyAnimation::finished, this, &SleepyPetTest::updateBehavior);
-	behaviorTreeManager->tick();
-}
-
-inline void SleepyPetTest::updateBehavior()
-{
-	animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
-	QTimer::singleShot(4000, this, [this]() {
-		behaviorTreeManager->tick(); // 执行下一个动作
-	});
 }
 
 bool SleepyPetTest::eventFilter(QObject* watched, QEvent* event)
@@ -236,7 +155,7 @@ bool SleepyPetTest::eventFilter(QObject* watched, QEvent* event)
 		offset = mouse_event->globalPosition().toPoint() - this->pos();
 		longPressTimer->start(1000);
 		stopBehavior();
-		animationStateMachine->triggerEvent(StateTransitionEvent::ToIdle);
+		stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 		return true;
 	}
 	else if (mouse_event->type() == QEvent::MouseMove)
@@ -246,11 +165,11 @@ bool SleepyPetTest::eventFilter(QObject* watched, QEvent* event)
 			this->move(mouse_event->globalPosition().toPoint() - offset);
 			if (mouseLocation.x() > mouse_event->globalPosition().toPoint().x())
 			{
-				animationStateMachine->triggerEvent(StateTransitionEvent::ToDragLeft);
+				stateMachine->triggerEvent(StateTransitionEvent::ToDragLeft);
 			}
 			else
 			{
-				animationStateMachine->triggerEvent(StateTransitionEvent::ToDragRight);
+				stateMachine->triggerEvent(StateTransitionEvent::ToDragRight);
 			}
 			mouseLocation = mouse_event->globalPosition().toPoint();
 			return true;

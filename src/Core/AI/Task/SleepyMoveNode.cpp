@@ -32,6 +32,12 @@ bool SleepyMoveNode::moveTowardsTarget() const
 
 void SleepyMoveNode::OnTerminate()
 {
+	canMove_ = true;
+	animation_->setDuration(2000);  // 2秒移动到底部
+	animation_->setStartValue(widget_->pos());
+	animation_->setEndValue(targetPos_);
+	connect(animation_, &QPropertyAnimation::finished, this, [this]() {canMove_ = false; });
+	animation_->start();
 }
 
 ENodeStatus SleepyMoveNode::OnUpdate()
