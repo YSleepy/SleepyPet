@@ -46,13 +46,6 @@
         <file>ZYimg/shime43.png</file>
         <file>ZYimg/shime44.png</file>
         <file>ZYimg/shime45.png</file>
-        <file>ZYimg/shime46.png</file>
-        <file>ZYimg/shime47.png</file>
-        <file>ZYimg/shime48.png</file>
-        <file>ZYimg/shime49.png</file>
-        <file>ZYimg/shime50.png</file>
-        <file>ZYimg/shime51.png</file>
-        <file>ZYimg/shime52.png</file>
     </qresource>
     <qresource prefix="/KLImage">
         <file>img/icon.png</file>

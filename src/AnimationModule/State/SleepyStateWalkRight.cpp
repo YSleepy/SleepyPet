@@ -1,7 +1,5 @@
 #include <QRandomGenerator>
-#include <QGuiApplication>
 #include <QScreen>
-#include <QTimer>
 
 #include "SleepyStateWalkRight.h"
 #include"SleepyStateFactory.h"
