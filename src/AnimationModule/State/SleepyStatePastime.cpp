@@ -1,6 +1,8 @@
 #include "SleepyStatePastime.h"
+
 #include "SleepyStateFactory.h"
-#include "QTimer"
+
+#include <QTimer>
 
 REGISTER_SLEEPY_STATE(SleepyStatePastime::state, SleepyStatePastime);
 
@@ -10,10 +12,11 @@ SleepyStatePastime::SleepyStatePastime(QObject* parent) :SleepyState(parent, Sle
 	animation->setAnimationWithBedinEnd(15, 18);
 }
 
-void SleepyStatePastime::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
+void SleepyStatePastime::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
 {
-	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget, preState);
 
+	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);
 	playAnimationTimer->callOnTimeout(this, &SleepyStatePastime::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());
 }

@@ -1,30 +1,40 @@
 #include "SleepyStateIdle.h"
+
 #include "SleepyStateFactory.h"
 #include "SleepyStateMachine.h"
 
+#include <QRandomGenerator>
 #include <QTimer>
+
+
 
 REGISTER_SLEEPY_STATE(SleepyStateIdle::state, SleepyStateIdle);
 
-SleepyStateIdle::SleepyStateIdle(QObject* parent):SleepyState(parent,SleepyStateIdle::state)
+SleepyStateIdle::SleepyStateIdle(QObject* parent)
+	:SleepyState(parent, SleepyStateIdle::state),
+	preState(State::SleepyStateIdle)
 {
-	animation = new SleepyAnimation(this, false,20);
+	animation = new SleepyAnimation(this, false, 20);
 	animation->setAnimationWithBedinEnd(1, 2);
 	setStateTransitionEvents(std::vector{
 		StateTransitionEvent::ToWalkLeft,
 		StateTransitionEvent::ToWalkRight,
+		StateTransitionEvent::ToSleep
 		});
 }
 
-void SleepyStateIdle::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
+void SleepyStateIdle::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
 {
-	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget, preState);
 	qDebug() << "Enter SleepyStateIdle";
+	this->preState = preState;
+
 	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);
 	playAnimationTimer->callOnTimeout(this, &SleepyStateIdle::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());
-	//TODO: 随机Idle
-	QTimer::singleShot(5000, this, [this]() {stateMachine->triggerEvent(getRandomTransitionEvent()); });
+
+	const int interval = QRandomGenerator::global()->bounded(5000, 12000);
+	QTimer::singleShot(interval, this, [this]() {stateMachine->triggerEvent(getRandomTransitionEvent()); });
 }
 
 void SleepyStateIdle::exit()
@@ -47,5 +57,14 @@ void SleepyStateIdle::updateRoleAnimation()
 		qDebug() << "Failed to load image.";
 		return;
 	}
-	playAnimationTarget->setPixmap(pixmap);
+
+	if(preState == State::SleepyStateWalkRight)
+	{
+		const QPixmap flippedPixmap = pixmap.transformed(QTransform().scale(-1, 1));
+		playAnimationTarget->setPixmap(flippedPixmap);
+	}
+	else
+	{
+		playAnimationTarget->setPixmap(pixmap);
+	}
 }

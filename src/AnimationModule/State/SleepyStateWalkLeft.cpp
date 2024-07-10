@@ -1,4 +1,5 @@
 #include "SleepyStateWalkLeft.h"
+
 #include "SleepyStateFactory.h"
 #include "SleepyStateMachine.h"
 
@@ -18,9 +19,9 @@ SleepyStateWalkLeft::SleepyStateWalkLeft(QObject* parent):SleepyState(parent,Sle
 		});
 }
 
-void SleepyStateWalkLeft::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
+void SleepyStateWalkLeft::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
 {
-	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget, preState);
 	qDebug() << "SleepyStateWalkLeft::enter";
 	//动画
 	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);

@@ -1,6 +1,8 @@
 #include "SleepyStateDragLeft.h"
+
 #include "SleepyStateFactory.h"
-#include "QTimer"
+
+#include <QTimer>
 
 REGISTER_SLEEPY_STATE(SleepyStateDragLeft::state, SleepyStateDragLeft);
 
@@ -10,10 +12,11 @@ SleepyStateDragLeft::SleepyStateDragLeft(QObject* parent) :SleepyState(parent, S
 	animation->setSequenceArray({6,8,10});
 }
 
-void SleepyStateDragLeft::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation,QWidget* widget)
+void SleepyStateDragLeft::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation,QWidget* widget,State preState)
 {
-	SleepyState::enter(animationTimer, animationTarget,propertyAnimation,widget);
+	SleepyState::enter(animationTimer, animationTarget,propertyAnimation,widget,preState);
 
+	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);
 	playAnimationTimer->callOnTimeout(this, &SleepyStateDragLeft::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());
 }

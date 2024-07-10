@@ -11,6 +11,7 @@
 #include "SleepyStateMachine.h"
 #include "SleepyStateIdle.h"
 #include "SleepyStatePastime.h"
+#include "SleepyStateSleep.h"
 #include "SleepyStateWalkLeft.h"
 #include "SleepyStateWalkRight.h"
 
@@ -21,8 +22,8 @@ inline StateTransitionTable* createStateTransitionTable()
 	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToWalkRight}] = SleepyStateWalkRight::state;
 	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToDragLeft}] = SleepyStateDragLeft::state;
 	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
-	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToPastime}] = SleepyStatePastime::state;
-
+	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToPastime}] = SleepyStatePastime::state;//音乐
+	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToSleep}] = SleepyStateSleep::state;
 
 	(*re)[{SleepyStateWalkLeft::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 	(*re)[{SleepyStateWalkLeft::state, StateTransitionEvent::ToDragLeft}] = SleepyStateDragLeft::state;
@@ -40,6 +41,7 @@ inline StateTransitionTable* createStateTransitionTable()
 
 	(*re)[{SleepyStateFall::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 	(*re)[{SleepyStatePastime::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
+	(*re)[{SleepyStateSleep::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 
 	return re;
 }
@@ -65,10 +67,6 @@ private:
 
 	void startMoveToBottom();
 	void stopBehavior();
-	//ENodeStatus moveLeft();
-	//ENodeStatus moveRight();
-	//ENodeStatus idle();
-	//ENodeStatus climbWall();
 
 private slots:
 
@@ -76,14 +74,11 @@ private slots:
 	inline void playToGroundAnimation();
 	inline void stopMusic();
 	inline void interact();
-	//inline void beginBehavior();
-	//inline void updateBehavior();
 
 private:
 
 	QLabel* mainShow;
 	SleepyStateMachine* stateMachine;
-	//SleepyBehaviorTree* behaviorTreeManager;
 	QPropertyAnimation* behaviorComponent;
 	QTimer* longPressTimer;
 	QMediaPlayer* mediaPlayer;

@@ -1,9 +1,10 @@
+#include "SleepyStateWalkRight.h"
+
+#include "SleepyStateFactory.h"
+#include "SleepyStateMachine.h"
+
 #include <QRandomGenerator>
 #include <QScreen>
-
-#include "SleepyStateWalkRight.h"
-#include"SleepyStateFactory.h"
-#include "SleepyStateMachine.h"
 
 REGISTER_SLEEPY_STATE(SleepyStateWalkRight::state, SleepyStateWalkRight);
 
@@ -17,9 +18,9 @@ SleepyStateWalkRight::SleepyStateWalkRight(QObject* parent) :SleepyState(parent,
 		});
 }
 
-void SleepyStateWalkRight::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget)
+void SleepyStateWalkRight::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
 {
-	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget, preState);
 
 	qDebug() << "SleepyStateWalkRight::enter";
 	//动画

@@ -7,7 +7,7 @@ class SleepyStateWalkLeft : public SleepyState,public ISleepyStateTransition
 public:
 	SleepyStateWalkLeft(QObject* parent);
 	inline static State state = State::SleepyStateWalkLeft;
-	void enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget) override;
+	void enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState) override;
 	void exit() override;
 	void update() override;
 

@@ -1,3 +1,5 @@
+#include "SleepyPetTest.h"
+
 #include <QTimer>
 #include <QGraphicsDropShadowEffect>
 #include <QMimeData>
@@ -5,9 +7,6 @@
 #include <QGuiApplication>
 #include <QMenu>
 #include <algorithm>
-
-#include "SleepyPetTest.h"
-
 
 
 SleepyPetTest::SleepyPetTest(QWidget* parent)
@@ -27,6 +26,7 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	this->resize(128, 130);
+	mainShow->setScaledContents(true);
 	mainShow->resize(128, 130);
 
 	//初始化位置
@@ -34,6 +34,7 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	const QRect screenGeometry = screen->geometry();
 	endY = screenGeometry.height() - this->height();
 	endX = 900;
+	//endX = screenGeometry.width() - this->width();
 	this->move(endX, endY);
 	
 	//初始化状态机
@@ -54,7 +55,6 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	//接受拖拽文件,bug解决办法 https://blog.csdn.net/hongrui1/article/details/50696683
 	setAcceptDrops(true);
 
-	//beginBehavior();
 }
 
 
@@ -105,7 +105,7 @@ void SleepyPetTest::contextMenuEvent(QContextMenuEvent* event)
 void SleepyPetTest::mousePressEvent(QMouseEvent* event)
 {
 	if (!rect().contains(event->pos())) {
-		//beginBehavior();
+		//TODO::点击窗口外，停止行为
 	}
 	QWidget::mousePressEvent(event);
 }
@@ -131,7 +131,6 @@ void SleepyPetTest::stopBehavior()
 inline void SleepyPetTest::playToGroundAnimation()
 {
 	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
-	//beginBehavior();
 }
 
 inline void SleepyPetTest::stopMusic()

@@ -1,10 +1,10 @@
 #pragma once
+#include "SleepyAnimation.h"
 
 #include <QLabel>
 #include <QObject>
 #include <QPropertyAnimation>
 
-#include "SleepyAnimation.h"
 
 class SleepyStateMachine;
 
@@ -16,7 +16,8 @@ enum class State
 	SleepyStateDragLeft,
 	SleepyStateDragRight,
 	SleepyStateFall,
-	SleepyStatePastime
+	SleepyStatePastime,
+	SleepyStateSleep
 };
 
 enum class StateTransitionEvent
@@ -27,7 +28,8 @@ enum class StateTransitionEvent
 	ToDragRight,
 	ToFall,
 	ToPastime,
-	ToIdle
+	ToIdle,
+	ToSleep
 };
 
 
@@ -38,7 +40,7 @@ class SleepyState : public QObject
 public:
 	SleepyState(QObject*parent,State state);
 	~SleepyState();
-	virtual void enter(QTimer* animationTimer,QLabel* animationTarget, QPropertyAnimation* propertyAnimation,QWidget* widget);
+	virtual void enter(QTimer* animationTimer,QLabel* animationTarget, QPropertyAnimation* propertyAnimation,QWidget* widget,State preState);
 	virtual void exit();
 	virtual void update() = 0;
 	State getStateType()const;

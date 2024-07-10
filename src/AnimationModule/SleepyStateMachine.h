@@ -1,13 +1,12 @@
 #pragma once
+#include "SleepyState.h"
+#include "SleepyStateFactory.h"
+
 #include <QLabel>
 #include <QObject>
 #include <QTimer>
 #include <QHash>
 #include <QDate>
-
-#include "SleepyState.h"
-#include "SleepyStateFactory.h"
-
 
 /*
  * 状态转移
@@ -52,6 +51,12 @@ public:
 	SleepyStateMachine(QObject *parent,QLabel* playAnimationTarget,QWidget* widget,State currentState, StateTransitionTable* (*createStateTransitionTable)());
 	~SleepyStateMachine();
 
+	/**
+	 * \brief 该函数通过查找状态表来切换状态
+	 *
+	 * \param event 通过event枚举和当前状态确定要转移的状态
+	 * \return State 状态转换成功返回以前状态，转换失败返回原状态
+	 */
 	bool triggerEvent(StateTransitionEvent event);
 
 

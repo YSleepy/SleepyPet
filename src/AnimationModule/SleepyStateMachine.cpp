@@ -22,7 +22,7 @@ SleepyStateMachine::SleepyStateMachine(QObject* parent, QLabel* playAnimationTar
 		}
 	}
 	this->currentState = (*statePool)[currentState];
-	this->currentState->enter(playAnimationTimer, playAnimationTarget, propertyAnimation, windows);
+	this->currentState->enter(playAnimationTimer, playAnimationTarget, propertyAnimation, windows,State::SleepyStateIdle);
 }
 
 SleepyStateMachine::~SleepyStateMachine()
@@ -31,11 +31,12 @@ SleepyStateMachine::~SleepyStateMachine()
 bool SleepyStateMachine::triggerEvent(StateTransitionEvent event)
 {
 	const auto findStateTransition = animationStateTransitionTable->find({ currentState->getStateType(),event });
+	const State preState = currentState->getStateType();
 	if (findStateTransition != animationStateTransitionTable->end())//找到了
 	{
 		currentState->exit();
 		currentState = (*statePool)[findStateTransition.value()];
-		currentState->enter(playAnimationTimer, playAnimationTarget,propertyAnimation,windows);
+		currentState->enter(playAnimationTimer, playAnimationTarget,propertyAnimation,windows,preState);
 		return true;
 	}
 	return false;

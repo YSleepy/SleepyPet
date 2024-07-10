@@ -117,6 +117,7 @@
     <ClInclude Include="src\AnimationModule\State\SleepyStateFall.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateIdle.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStatePastime.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateSleep.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateWalkLeft.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateWalkRight.h" />
   </ItemGroup>
@@ -131,6 +132,7 @@
     <ClCompile Include="src\AnimationModule\State\SleepyStateFall.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateIdle.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStatePastime.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateSleep.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateWalkLeft.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateWalkRight.cpp" />
     <ClCompile Include="src\Main.cpp" />
