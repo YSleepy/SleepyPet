@@ -5,11 +5,14 @@
 #include <QMouseEvent>
 
 //#include "SleepyBehaviorTree.h"
+#include "SleepyStateCrawl.h"
+#include "SleepyStateCrawlIdle.h"
 #include "SleepyStateDragLeft.h"
 #include "SleepyStateDragRight.h"
 #include "SleepyStateFall.h"
 #include "SleepyStateMachine.h"
 #include "SleepyStateIdle.h"
+#include "SleepyStateJump.h"
 #include "SleepyStatePastime.h"
 #include "SleepyStateSleep.h"
 #include "SleepyStateWalkLeft.h"
@@ -24,14 +27,20 @@ inline StateTransitionTable* createStateTransitionTable()
 	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
 	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToPastime}] = SleepyStatePastime::state;//音乐
 	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToSleep}] = SleepyStateSleep::state;
+	(*re)[{SleepyStateIdle::state, StateTransitionEvent::ToJump}] = SleepyStateJump::state;
 
 	(*re)[{SleepyStateWalkLeft::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 	(*re)[{SleepyStateWalkLeft::state, StateTransitionEvent::ToDragLeft}] = SleepyStateDragLeft::state;
 	(*re)[{SleepyStateWalkLeft::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
+	(*re)[{SleepyStateWalkLeft::state, StateTransitionEvent::ToJump}] = SleepyStateJump::state;
 
 	(*re)[{SleepyStateWalkRight::state, StateTransitionEvent::ToIdle}] = SleepyStateIdle::state;
 	(*re)[{SleepyStateWalkRight::state, StateTransitionEvent::ToDragLeft}] = SleepyStateDragLeft::state;
 	(*re)[{SleepyStateWalkRight::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
+	(*re)[{SleepyStateWalkRight::state, StateTransitionEvent::ToJump}] = SleepyStateJump::state;
+
+	(*re)[{SleepyStateJump::state, StateTransitionEvent::ToCrawlIdle}] = SleepyStateCrawlIdle::state;
+	//(*re)[{SleepyStateCrawlIdle::state, StateTransitionEvent::ToCrawl}] = SleepyStateCrawl::state;
 
 	(*re)[{SleepyStateDragLeft::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
 	(*re)[{SleepyStateDragLeft::state, StateTransitionEvent::ToFall}] = SleepyStateFall::state;

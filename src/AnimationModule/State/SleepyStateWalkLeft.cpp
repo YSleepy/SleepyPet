@@ -15,7 +15,8 @@ SleepyStateWalkLeft::SleepyStateWalkLeft(QObject* parent):SleepyState(parent,Sle
 	animation = new SleepyAnimation(this, false, 200);
 	animation->setAnimationWithBedinEnd(1, 4);
 	setStateTransitionEvents(std::vector{
-	StateTransitionEvent::ToIdle
+		StateTransitionEvent::ToIdle,
+		StateTransitionEvent::ToJump
 		});
 }
 
@@ -52,7 +53,14 @@ void SleepyStateWalkLeft::update()
 
 void SleepyStateWalkLeft::autoTransitionState()
 {
-	stateMachine->triggerEvent(getRandomTransitionEvent());
+	const int screenWidth = QGuiApplication::primaryScreen()->geometry().width();
+	if (windows->x() <= 2 * windows->width())
+	{
+		//有概率进入ToJump
+		stateMachine->triggerEvent(getRandomTransitionEvent());
+		return;
+	}
+	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 }
 
 void SleepyStateWalkLeft::updateRoleAnimation()

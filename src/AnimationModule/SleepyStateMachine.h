@@ -58,7 +58,7 @@ public:
 	 * \return State 状态转换成功返回以前状态，转换失败返回原状态
 	 */
 	bool triggerEvent(StateTransitionEvent event);
-
+	State getCurrentState() const;
 
 private:
 	

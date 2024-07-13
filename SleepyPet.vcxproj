@@ -112,10 +112,13 @@
     <QtMoc Include="src\Test\SleepyPet.h" />
     <QtMoc Include="src\AnimationModule\SleepyStateMachine.h" />
     <QtMoc Include="src\AnimationModule\SleepyAnimation.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateCrawl.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateCrawlIdle.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateDragLeft.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateDragRight.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateFall.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateIdle.h" />
+    <ClInclude Include="src\AnimationModule\State\SleepyStateJump.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStatePastime.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateSleep.h" />
     <ClInclude Include="src\AnimationModule\State\SleepyStateWalkLeft.h" />
@@ -127,10 +130,13 @@
     <ClCompile Include="src\AnimationModule\SleepyStateFactory.cpp" />
     <ClCompile Include="src\AnimationModule\SleepyStateMachine.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyState.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawlIdle.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateDragLeft.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateDragRight.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateFall.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateIdle.cpp" />
+    <ClCompile Include="src\AnimationModule\State\SleepyStateJump.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStatePastime.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateSleep.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateWalkLeft.cpp" />

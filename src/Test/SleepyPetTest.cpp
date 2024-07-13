@@ -26,6 +26,7 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	setWindowFlags(Qt::WindowType::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 	setAttribute(Qt::WA_TranslucentBackground);
 	this->resize(128, 130);
+	
 	mainShow->setScaledContents(true);
 	mainShow->resize(128, 130);
 
@@ -34,6 +35,7 @@ SleepyPetTest::SleepyPetTest(QWidget* parent)
 	const QRect screenGeometry = screen->geometry();
 	endY = screenGeometry.height() - this->height();
 	endX = 900;
+	endX = 1100;
 	//endX = screenGeometry.width() - this->width();
 	this->move(endX, endY);
 	
@@ -105,7 +107,7 @@ void SleepyPetTest::contextMenuEvent(QContextMenuEvent* event)
 void SleepyPetTest::mousePressEvent(QMouseEvent* event)
 {
 	if (!rect().contains(event->pos())) {
-		//TODO::点击窗口外，停止行为
+		//TODO: 点击窗口外，停止行为
 	}
 	QWidget::mousePressEvent(event);
 }

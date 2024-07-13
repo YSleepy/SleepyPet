@@ -1,4 +1,4 @@
-#include "SleepyStateIdle.h"
+#include "SleepyStateCrawl.h"
 
 #include "SleepyStateFactory.h"
 #include "SleepyStateMachine.h"
@@ -8,47 +8,47 @@
 #include <QScreen>
 #include <QTimer>
 
-REGISTER_SLEEPY_STATE(SleepyStateIdle::state, SleepyStateIdle);
+REGISTER_SLEEPY_STATE(SleepyStateCrawl::state, SleepyStateCrawl);
 
-SleepyStateIdle::SleepyStateIdle(QObject* parent)
-	:SleepyState(parent, SleepyStateIdle::state),
+SleepyStateCrawl::SleepyStateCrawl(QObject* parent)
+	:SleepyState(parent, SleepyStateCrawl::state),
 	preState(State::SleepyStateIdle)
 {
 	animation = new SleepyAnimation(this, false, 20);
 	animation->setAnimationWithBedinEnd(1, 2);
 	setStateTransitionEvents(std::vector{
-		//StateTransitionEvent::ToWalkLeft,
+		StateTransitionEvent::ToWalkLeft,
 		StateTransitionEvent::ToWalkRight,
-		//StateTransitionEvent::ToSleep,
+		StateTransitionEvent::ToSleep,
 		StateTransitionEvent::ToJump
 		});
 }
 
-void SleepyStateIdle::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
+void SleepyStateCrawl::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
 {
-	SleepyState::enter(animationTimer, animationTarget, propertyAnimation,widget, preState);
+	SleepyState::enter(animationTimer, animationTarget, propertyAnimation, widget, preState);
 	qDebug() << "Enter SleepyStateIdle";
 	this->preState = preState;
 
 	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);
-	playAnimationTimer->callOnTimeout(this, &SleepyStateIdle::updateRoleAnimation);
+	playAnimationTimer->callOnTimeout(this, &SleepyStateCrawl::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());
 
 	const int interval = QRandomGenerator::global()->bounded(5000, 12000);
-	QTimer::singleShot(interval, this, &SleepyStateIdle::autoTransitionState);
+	QTimer::singleShot(interval, this, &SleepyStateCrawl::autoTransitionState);
 }
 
-void SleepyStateIdle::exit()
+void SleepyStateCrawl::exit()
 {
 	SleepyState::exit();
 	moveComponent->stop();
 }
 
-void SleepyStateIdle::update()
+void SleepyStateCrawl::update()
 {
 }
 
-void SleepyStateIdle::autoTransitionState()
+void SleepyStateCrawl::autoTransitionState()
 {
 	const int screenWidth = QGuiApplication::primaryScreen()->geometry().width();
 	if (windows->x() <= 2 * windows->width() || windows->x() >= screenWidth - 2 * windows->width())
@@ -58,7 +58,7 @@ void SleepyStateIdle::autoTransitionState()
 	stateMachine->triggerEvent(getRandomTransitionEvent(StateTransitionEvent::ToJump));
 }
 
-void SleepyStateIdle::updateRoleAnimation()
+void SleepyStateCrawl::updateRoleAnimation()
 {
 	const QString qss("background-repeat:no-repeat;");
 	playAnimationTarget->setStyleSheet(qss);
@@ -68,7 +68,7 @@ void SleepyStateIdle::updateRoleAnimation()
 		return;
 	}
 
-	if(preState == State::SleepyStateWalkRight)
+	if (preState == State::SleepyStateWalkRight)
 	{
 		const QPixmap flippedPixmap = pixmap.transformed(QTransform().scale(-1, 1));
 		playAnimationTarget->setPixmap(flippedPixmap);

@@ -111,6 +111,15 @@
     <ClInclude Include="src\AnimationModule\State\SleepyStateSleep.h">
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateJump.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateCrawlIdle.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\State\SleepyStateCrawl.h">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AnimationModule\State\SleepyState.cpp">
@@ -162,6 +171,24 @@
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClCompile>
     <ClCompile Include="src\AnimationModule\State\SleepyStateSleep.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateJump.cpp">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateJump.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawlIdle.cpp">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp">
+      <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp">
+      <Filter>Header Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCraw.cpp">
       <Filter>Source Files\AnimationModule\State</Filter>
     </ClCompile>
   </ItemGroup>

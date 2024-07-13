@@ -10,6 +10,7 @@ class SleepyStateMachine;
 
 enum class State
 {
+	SleepyStateNone,
 	SleepyStateIdle,
 	SleepyStateWalkLeft,
 	SleepyStateWalkRight,
@@ -17,11 +18,15 @@ enum class State
 	SleepyStateDragRight,
 	SleepyStateFall,
 	SleepyStatePastime,
-	SleepyStateSleep
+	SleepyStateSleep,
+	SleepyStateJump,
+	SleepyStateCrawlIdle,
+	SleepyStateCrawl
 };
 
 enum class StateTransitionEvent
 {
+	None,
 	ToWalkLeft,
 	ToWalkRight,
 	ToDragLeft,
@@ -29,7 +34,10 @@ enum class StateTransitionEvent
 	ToFall,
 	ToPastime,
 	ToIdle,
-	ToSleep
+	ToSleep,
+	ToJump,
+	ToCrawlIdle,
+	ToCrawl
 };
 
 

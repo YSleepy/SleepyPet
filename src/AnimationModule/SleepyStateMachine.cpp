@@ -41,3 +41,8 @@ bool SleepyStateMachine::triggerEvent(StateTransitionEvent event)
 	}
 	return false;
 }
+
+State SleepyStateMachine::getCurrentState() const
+{
+	return currentState->getStateType();
+}
