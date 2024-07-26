@@ -17,9 +17,9 @@ SleepyStateIdle::SleepyStateIdle(QObject* parent)
 	animation = new SleepyAnimation(this, false, 20);
 	animation->setAnimationWithBedinEnd(1, 2);
 	setStateTransitionEvents(std::vector{
-		//StateTransitionEvent::ToWalkLeft,
+		StateTransitionEvent::ToWalkLeft,
 		StateTransitionEvent::ToWalkRight,
-		//StateTransitionEvent::ToSleep,
+		StateTransitionEvent::ToSleep,
 		StateTransitionEvent::ToJump
 		});
 }

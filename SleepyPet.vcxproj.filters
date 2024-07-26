@@ -179,16 +179,13 @@
     <ClCompile Include="src\AnimationModule\State\SleepyStateJump.cpp">
       <Filter>Source Files\AnimationModule\State</Filter>
     </ClCompile>
-    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawlIdle.cpp">
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp">
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClCompile>
-    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp">
+    <ClCompile Include="src\AnimationModule\State\SleepyStateCrawlIdle.cpp">
       <Filter>Source Files\AnimationModule\State</Filter>
     </ClCompile>
     <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp">
-      <Filter>Header Files\AnimationModule\State</Filter>
-    </ClCompile>
-    <ClCompile Include="src\AnimationModule\State\SleepyStateCraw.cpp">
       <Filter>Source Files\AnimationModule\State</Filter>
     </ClCompile>
   </ItemGroup>

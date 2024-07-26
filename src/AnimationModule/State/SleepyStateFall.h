@@ -9,7 +9,15 @@ public:
 	void enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState) override;
 	void exit() override;
 	void update() override;
+
+private slots: 
+	void autoTransitionState();
+
 private:
 	void updateRoleAnimation();
+
+private:
+	QRect screenRect;
+	int fallSpeed;
 };
 

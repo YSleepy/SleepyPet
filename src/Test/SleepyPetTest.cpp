@@ -115,24 +115,12 @@ void SleepyPetTest::mousePressEvent(QMouseEvent* event)
 void SleepyPetTest::startMoveToBottom()
 {
 	stateMachine->triggerEvent(StateTransitionEvent::ToFall);
-
-	QPropertyAnimation* fall = new QPropertyAnimation(this, "pos");
-	fall->setDuration(2000);  // 2秒移动到底部
-	fall->setStartValue(this->pos());
-	fall->setEndValue(QPoint(this->x(), endY));
-	connect(fall, &QPropertyAnimation::finished, this, &SleepyPetTest::playToGroundAnimation);
-	fall->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 void SleepyPetTest::stopBehavior()
 {
 	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	bCanBehavior = false;
-}
-
-inline void SleepyPetTest::playToGroundAnimation()
-{
-	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 }
 
 inline void SleepyPetTest::stopMusic()
@@ -156,7 +144,6 @@ bool SleepyPetTest::eventFilter(QObject* watched, QEvent* event)
 		offset = mouse_event->globalPosition().toPoint() - this->pos();
 		longPressTimer->start(1000);
 		stopBehavior();
-		stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 		return true;
 	}
 	else if (mouse_event->type() == QEvent::MouseMove)
@@ -164,11 +151,12 @@ bool SleepyPetTest::eventFilter(QObject* watched, QEvent* event)
 		if (mouse_event->buttons() & Qt::MouseButton::LeftButton && bCanMove)
 		{
 			this->move(mouse_event->globalPosition().toPoint() - offset);
-			if (mouseLocation.x() > mouse_event->globalPosition().toPoint().x())
+			const int IsLeftRight = mouseLocation.x() - mouse_event->globalPosition().toPoint().x();
+			if (IsLeftRight > 0)
 			{
 				stateMachine->triggerEvent(StateTransitionEvent::ToDragLeft);
 			}
-			else
+			else if(IsLeftRight < 0)
 			{
 				stateMachine->triggerEvent(StateTransitionEvent::ToDragRight);
 			}
@@ -181,7 +169,7 @@ bool SleepyPetTest::eventFilter(QObject* watched, QEvent* event)
 	{
 		longPressTimer->stop();
 		bCanMove = false;
-		startMoveToBottom();
+		stateMachine->triggerEvent(StateTransitionEvent::ToFall);
 		return true;
 	}
 

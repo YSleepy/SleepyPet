@@ -41,7 +41,7 @@ void SleepyStateSleep::updateRoleAnimation()
 	//const QString qss("background-repeat:no-repeat;");
 	//playAnimationTarget->setStyleSheet(qss);
 	const QPixmap pixmap(QString(":/ZYImage/ZYimg/shime%1.png").arg(animation->current));
-	qDebug() << QString("IDLE:/ZYImage/ZYimg/shime%1.png").arg(animation->current);
+	//qDebug() << QString("IDLE:/ZYImage/ZYimg/shime%1.png").arg(animation->current);
 	if (pixmap.isNull()) {
 		qDebug() << "Failed to load image.";
 		return;

@@ -40,7 +40,9 @@ inline StateTransitionTable* createStateTransitionTable()
 	(*re)[{SleepyStateWalkRight::state, StateTransitionEvent::ToJump}] = SleepyStateJump::state;
 
 	(*re)[{SleepyStateJump::state, StateTransitionEvent::ToCrawlIdle}] = SleepyStateCrawlIdle::state;
-	//(*re)[{SleepyStateCrawlIdle::state, StateTransitionEvent::ToCrawl}] = SleepyStateCrawl::state;
+
+	(*re)[{SleepyStateCrawlIdle::state, StateTransitionEvent::ToDragLeft}] = SleepyStateDragLeft::state;
+	(*re)[{SleepyStateCrawlIdle::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
 
 	(*re)[{SleepyStateDragLeft::state, StateTransitionEvent::ToDragRight}] = SleepyStateDragRight::state;
 	(*re)[{SleepyStateDragLeft::state, StateTransitionEvent::ToFall}] = SleepyStateFall::state;
@@ -73,14 +75,11 @@ protected:
 	void mousePressEvent(QMouseEvent* event) override;
 
 private:
-
 	void startMoveToBottom();
 	void stopBehavior();
 
 private slots:
-
 	inline void allowMove();
-	inline void playToGroundAnimation();
 	inline void stopMusic();
 	inline void interact();
 

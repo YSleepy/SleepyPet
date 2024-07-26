@@ -22,5 +22,6 @@ private:
 	double jumpNeedTime;
 	double currentTime;
 	QRect screenGeometry;
+	bool isRightJump;
 
 };

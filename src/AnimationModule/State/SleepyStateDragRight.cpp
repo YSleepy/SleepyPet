@@ -8,7 +8,7 @@ REGISTER_SLEEPY_STATE(SleepyStateDragRight::state, SleepyStateDragRight);
 
 SleepyStateDragRight::SleepyStateDragRight(QObject* parent) :SleepyState(parent, SleepyStateDragRight::state)
 {
-	animation = new SleepyAnimation(this, false, 1);
+	animation = new SleepyAnimation(this, false, 50);
 	animation->setSequenceArray({ 5,7,9 });
 }
 
@@ -16,7 +16,7 @@ SleepyStateDragRight::SleepyStateDragRight(QObject* parent) :SleepyState(parent,
 void SleepyStateDragRight::enter(QTimer* animationTimer, QLabel* animationTarget, QPropertyAnimation* propertyAnimation, QWidget* widget, State preState)
 {
 	SleepyState::enter(animationTimer, animationTarget,propertyAnimation,widget, preState);
-
+	qDebug() << "Enter SleepyStateDragRight";
 	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);
 	playAnimationTimer->callOnTimeout(this, &SleepyStateDragRight::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());
@@ -25,6 +25,7 @@ void SleepyStateDragRight::enter(QTimer* animationTimer, QLabel* animationTarget
 void SleepyStateDragRight::exit()
 {
 	SleepyState::exit();
+	playAnimationTimer->stop();
 }
 
 void SleepyStateDragRight::update()
@@ -38,6 +39,7 @@ void SleepyStateDragRight::updateRoleAnimation()
 		qDebug() << "Failed to load image.";
 		return;
 	}
+	//qDebug() << "RightCurrent animation frame: " << animation->current;
 	playAnimationTarget->setPixmap(pixmap);
 
 	++animation->SequenceArraycursor;

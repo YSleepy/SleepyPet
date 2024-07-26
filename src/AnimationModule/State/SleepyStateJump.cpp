@@ -58,7 +58,6 @@ void SleepyStateJump::updateRoleAnimation()
 	const QString qss("background-repeat:no-repeat;");
 	playAnimationTarget->setStyleSheet(qss);
 	const QPixmap pixmap(QString(":/ZYImage/ZYimg/shime%1.png").arg(animation->current));
-	//qDebug() << QString("Jump:/ZYImage/ZYimg/shime%1.png").arg(animation->current);
 	if (pixmap.isNull()) {
 		qDebug() << "Failed to load image.";
 		return;
@@ -94,7 +93,7 @@ void SleepyStateJump::updateProperMove()
 
 	// 更新y坐标
 	const double newY = a * std::pow(newX - h, 2) + k;
-	if (newX >= h || newY >= y_start) {
+	if (isRightJump && newX >= highPoint.x() || !isRightJump && newX <= highPoint.x()) {
 		// TODO: 转换状态
 		stateMachine->triggerEvent(StateTransitionEvent::ToCrawlIdle);
 	}
@@ -107,9 +106,11 @@ void SleepyStateJump::readyJump()
 	startPoint = windows->pos();
 	if (windows->x() > screenGeometry.width() / 2)
 	{
+		isRightJump = true;
 		highPoint = QPoint(screenGeometry.width() - windows->width() / 2, screenGeometry.height() - windows->height() * 2);
 	}else
 	{
+		isRightJump = false;
 		highPoint = QPoint(screenGeometry.left() - windows->width() / 2, screenGeometry.height() - windows->height() * 2);
 	}
 }
