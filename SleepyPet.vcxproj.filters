@@ -105,9 +105,6 @@
     <ClInclude Include="src\AnimationModule\SleepyStateFactory.h">
       <Filter>Header Files\AnimationModule</Filter>
     </ClInclude>
-    <ClInclude Include="ISleepyStateTransition.h">
-      <Filter>Header Files\AnimationModule</Filter>
-    </ClInclude>
     <ClInclude Include="src\AnimationModule\State\SleepyStateSleep.h">
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClInclude>
@@ -119,6 +116,9 @@
     </ClInclude>
     <ClInclude Include="src\AnimationModule\State\SleepyStateCrawl.h">
       <Filter>Header Files\AnimationModule\State</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationModule\ISleepyStateTransition.h">
+      <Filter>Header Files\AnimationModule</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +164,6 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ISleepyStateTransition.cpp">
-      <Filter>Source Files\AnimationModule</Filter>
-    </ClCompile>
     <ClCompile Include="src\AnimationModule\State\SleepyStateSleep.cpp">
       <Filter>Header Files\AnimationModule\State</Filter>
     </ClCompile>
@@ -187,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="src\AnimationModule\State\SleepyStateCrawl.cpp">
       <Filter>Source Files\AnimationModule\State</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationModule\ISleepyStateTransition.cpp">
+      <Filter>Source Files\AnimationModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

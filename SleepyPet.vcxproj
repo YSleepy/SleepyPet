@@ -106,7 +106,7 @@
     <QtMoc Include="src\AnimationModule\State\SleepyState.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ISleepyStateTransition.h" />
+    <ClInclude Include="src\AnimationModule\ISleepyStateTransition.h" />
     <ClInclude Include="src\AnimationModule\SleepyStateFactory.h" />
     <QtMoc Include="src\Test\SleepyPetTest.h" />
     <QtMoc Include="src\Test\SleepyPet.h" />
@@ -125,7 +125,7 @@
     <ClInclude Include="src\AnimationModule\State\SleepyStateWalkRight.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ISleepyStateTransition.cpp" />
+    <ClCompile Include="src\AnimationModule\ISleepyStateTransition.cpp" />
     <ClCompile Include="src\AnimationModule\SleepyAnimation.cpp" />
     <ClCompile Include="src\AnimationModule\SleepyStateFactory.cpp" />
     <ClCompile Include="src\AnimationModule\SleepyStateMachine.cpp" />
