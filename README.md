@@ -1,7 +1,7 @@
 # SleepyPet
 
 ____________
-
+写的头晕，暂停更新
 
 开发者PC：1920\*1080 with 125% 逻辑大小：1536\*864
 
@@ -24,3 +24,13 @@ ____________
 * [ ] QRect screenGeometry;可以被定义为全局变量;
 * [ ] 移动桌宠动画，使用事件过滤器和状态机无法全面控制，需要使用定时器
 
+状态设计
+
+`SleepyStateCrawl`:
+> 当桌面宠物从CrawlIdle进入Crawl后，
+桌面宠物只能向上爬行（一段距离），而后返回CrawlIdle，
+当达到一定高度后，忽略Crawl，直接进入CrawlIdle或JumpDown
+{尝试采用动画驱动行为}
+`SleepyStateSleep`:
+> 当桌面宠物从SleepIdle进入Sleep后，宠物有较长时间的睡眠时间，睡眠期间可被惊动
+惊动后，睡眠时间加长。

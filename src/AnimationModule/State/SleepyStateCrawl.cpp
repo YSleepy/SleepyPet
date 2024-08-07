@@ -12,13 +12,11 @@ REGISTER_SLEEPY_STATE(SleepyStateCrawl::state, SleepyStateCrawl);
 
 SleepyStateCrawl::SleepyStateCrawl(QObject* parent)
 	:SleepyState(parent, SleepyStateCrawl::state),
-	preState(State::SleepyStateIdle)
+	preState(State::SleepyStateCrawl)
 {
 	animation = new SleepyAnimation(this, false, 20);
 	animation->setAnimationWithBedinEnd(1, 2);
 	setStateTransitionEvents(std::vector{
-		StateTransitionEvent::ToWalkLeft,
-		StateTransitionEvent::ToWalkRight,
 		StateTransitionEvent::ToSleep,
 		StateTransitionEvent::ToJump
 		});

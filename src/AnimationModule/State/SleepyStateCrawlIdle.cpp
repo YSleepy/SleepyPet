@@ -18,7 +18,9 @@ SleepyStateCrawlIdle::SleepyStateCrawlIdle(QObject* parent)
 	animation = new SleepyAnimation(this, false, 20);
 	animation->setAnimationWithBedinEnd(12, 13);
 	setStateTransitionEvents(std::vector{
-		StateTransitionEvent::ToCrawl
+		StateTransitionEvent::ToCrawl,
+		StateTransitionEvent::ToCrawlIdle,
+
 		});
 }
 
@@ -27,11 +29,12 @@ void SleepyStateCrawlIdle::enter(QTimer* animationTimer, QLabel* animationTarget
 	SleepyState::enter(animationTimer, animationTarget, propertyAnimation, widget, preState);
 	qDebug() << "Enter SleepyStateCrawlIdle";
 
-
 	disconnect(playAnimationTimer, &QTimer::timeout, nullptr, nullptr);
 	playAnimationTimer->callOnTimeout(this, &SleepyStateCrawlIdle::updateRoleAnimation);
 	playAnimationTimer->start(animation->getIFG());
+	//随机时间后触发下一个状态
 
+	
 	const int interval = QRandomGenerator::global()->bounded(5000, 12000);
 	QTimer::singleShot(interval, this, [this]() {stateMachine->triggerEvent(getRandomTransitionEvent()); });
 }
