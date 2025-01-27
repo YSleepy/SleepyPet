@@ -36,7 +36,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.4.3_msvc2019_64</QtInstall>
+    <QtInstall>6.8.1_msvc2022_64</QtInstall>
     <QtModules>core;gui;widgets;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -60,15 +60,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+      <AdditionalLibraryDirectories>D:\Environment\Spark1.5_Windows_SDK_v1.1\Spark1.5_Windows_SDK_v1.1\libs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SparkChain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule\State;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Test;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI\Task;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src;D:\Environment\Spark1.5_Windows_SDK_v1.1\Spark1.5_Windows_SDK_v1.1\include;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule\State;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Test;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI\Task;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -108,6 +113,8 @@
   <ItemGroup>
     <ClInclude Include="src\AnimationModule\ISleepyStateTransition.h" />
     <ClInclude Include="src\AnimationModule\SleepyStateFactory.h" />
+    <ClInclude Include="src\Base\SleepyTool.h" />
+    <ClInclude Include="src\Config\Config.h" />
     <QtMoc Include="src\Test\SleepyPetTest.h" />
     <QtMoc Include="src\Test\SleepyPet.h" />
     <QtMoc Include="src\AnimationModule\SleepyStateMachine.h" />
@@ -141,12 +148,65 @@
     <ClCompile Include="src\AnimationModule\State\SleepyStateSleep.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateWalkLeft.cpp" />
     <ClCompile Include="src\AnimationModule\State\SleepyStateWalkRight.cpp" />
+    <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Test\SleepyPet.cpp" />
     <ClCompile Include="src\Test\SleepyPetTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="config\config.json" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ZYimg\icon.png" />
+    <Image Include="ZYimg\shime1.png" />
+    <Image Include="ZYimg\shime10.png" />
+    <Image Include="ZYimg\shime11.png" />
+    <Image Include="ZYimg\shime12.png" />
+    <Image Include="ZYimg\shime13.png" />
+    <Image Include="ZYimg\shime14.png" />
+    <Image Include="ZYimg\shime15.png" />
+    <Image Include="ZYimg\shime16.png" />
+    <Image Include="ZYimg\shime17.png" />
+    <Image Include="ZYimg\shime18.png" />
+    <Image Include="ZYimg\shime19.png" />
+    <Image Include="ZYimg\shime2.png" />
+    <Image Include="ZYimg\shime20.png" />
+    <Image Include="ZYimg\shime21.png" />
+    <Image Include="ZYimg\shime22.png" />
+    <Image Include="ZYimg\shime23.png" />
+    <Image Include="ZYimg\shime24.png" />
+    <Image Include="ZYimg\shime25.png" />
+    <Image Include="ZYimg\shime26.png" />
+    <Image Include="ZYimg\shime27.png" />
+    <Image Include="ZYimg\shime28.png" />
+    <Image Include="ZYimg\shime29.png" />
+    <Image Include="ZYimg\shime3.png" />
+    <Image Include="ZYimg\shime30.png" />
+    <Image Include="ZYimg\shime31.png" />
+    <Image Include="ZYimg\shime32.png" />
+    <Image Include="ZYimg\shime33.png" />
+    <Image Include="ZYimg\shime34.png" />
+    <Image Include="ZYimg\shime35.png" />
+    <Image Include="ZYimg\shime36.png" />
+    <Image Include="ZYimg\shime37.png" />
+    <Image Include="ZYimg\shime38.png" />
+    <Image Include="ZYimg\shime39.png" />
+    <Image Include="ZYimg\shime4.png" />
+    <Image Include="ZYimg\shime40.png" />
+    <Image Include="ZYimg\shime41.png" />
+    <Image Include="ZYimg\shime42.png" />
+    <Image Include="ZYimg\shime43.png" />
+    <Image Include="ZYimg\shime44.png" />
+    <Image Include="ZYimg\shime45.png" />
+    <Image Include="ZYimg\shime5.png" />
+    <Image Include="ZYimg\shime6.png" />
+    <Image Include="ZYimg\shime7.png" />
+    <Image Include="ZYimg\shime8.png" />
+    <Image Include="ZYimg\shime9.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

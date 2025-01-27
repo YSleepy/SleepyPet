@@ -1,0 +1,9 @@
+{
+  "AiConfig": {
+	"APPID": "87da5421",
+	"APISecret": "ZjdiNzMxNjA0Y2VhOTZmODAwOTk3OTAx",
+	"APIKey": "6139736213b516e8d24628b2f42888b2",
+	"domain": "general",
+	"url": "wss://spark-api.xf-yun.com/v1.1/chat"
+  }
+}

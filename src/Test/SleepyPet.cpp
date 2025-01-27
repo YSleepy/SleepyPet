@@ -1,5 +1,5 @@
 #include "SleepyPet.h"
-#include<QTimer>
+#include <QTimer>
 #include <QGraphicsDropShadowEffect>
 #include <QMouseEvent>
 

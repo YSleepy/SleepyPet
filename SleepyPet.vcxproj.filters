@@ -120,6 +120,12 @@
     <ClInclude Include="src\AnimationModule\ISleepyStateTransition.h">
       <Filter>Header Files\AnimationModule</Filter>
     </ClInclude>
+    <ClInclude Include="src\Config\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Base\SleepyTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AnimationModule\State\SleepyState.cpp">
@@ -188,8 +194,155 @@
     <ClCompile Include="src\AnimationModule\ISleepyStateTransition.cpp">
       <Filter>Source Files\AnimationModule</Filter>
     </ClCompile>
+    <ClCompile Include="src\Config\Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include=".editorconfig" />
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="config\config.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ZYimg\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime10.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime11.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime14.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime15.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime16.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime17.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime18.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime19.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime20.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime21.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime22.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime23.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime24.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime25.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime26.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime27.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime28.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime29.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime30.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime31.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime32.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime33.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime34.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime35.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime36.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime37.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime38.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime39.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime40.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime41.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime42.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime43.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime44.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ZYimg\shime45.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -6,7 +6,6 @@
 #include <QAudioOutput>
 #include <QGuiApplication>
 #include <QMenu>
-#include <algorithm>
 
 
 SleepyPetTest::SleepyPetTest(QWidget* parent)
@@ -121,6 +120,20 @@ void SleepyPetTest::stopBehavior()
 {
 	stateMachine->triggerEvent(StateTransitionEvent::ToIdle);
 	bCanBehavior = false;
+}
+
+void SleepyPetTest::InitAi()
+{
+	aiConfig = SparkChain::SparkChainConfig::builder();
+	aiConfig->appID("$87da5421")
+		->apiKey("$6139736213b516e8d24628b2f42888b2")
+		->apiSecret("$ZjdiNzMxNjA0Y2VhOTZmODAwOTk3OTAx");
+	int ret = SparkChain::init(aiConfig);
+	qDebug() << "ret : " << ret;
+	llmConfig = SparkChain::LLMConfig::builder();
+	llmConfig->domain("general");
+	llmConfig->url("wss://spark-api.xf-yun.com/v1.1/chat");
+	llm = SparkChain::LLM::create(llmConfig);
 }
 
 inline void SleepyPetTest::stopMusic()

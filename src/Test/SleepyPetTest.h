@@ -3,6 +3,7 @@
 #include <QMediaPlayer>
 #include <random>
 #include <QMouseEvent>
+#include <sparkchain.h>
 
 //#include "SleepyBehaviorTree.h"
 #include "SleepyStateCrawl.h"
@@ -77,6 +78,7 @@ protected:
 private:
 	void startMoveToBottom();
 	void stopBehavior();
+	void InitAi();
 
 private slots:
 	inline void allowMove();
@@ -90,6 +92,9 @@ private:
 	QPropertyAnimation* behaviorComponent;
 	QTimer* longPressTimer;
 	QMediaPlayer* mediaPlayer;
+	SparkChain::SparkChainConfig* aiConfig;
+	SparkChain::LLMConfig* llmConfig;
+	SparkChain::LLM* llm;
 	std::mt19937 generator;
 	std::uniform_int_distribution<int> moveDuration;
 	std::uniform_int_distribution<int> moveDistance;
