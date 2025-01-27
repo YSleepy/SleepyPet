@@ -68,11 +68,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
-      <AdditionalLibraryDirectories>D:\Environment\Spark1.5_Windows_SDK_v1.1\Spark1.5_Windows_SDK_v1.1\libs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libs\Spark1.5_Windows_SDK_v1.1\Spark1.5_Windows_SDK_v1.1\libs\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SparkChain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src;D:\Environment\Spark1.5_Windows_SDK_v1.1\Spark1.5_Windows_SDK_v1.1\include;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule\State;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Test;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI\Task;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src;$(SolutionDir)libs\Spark1.5_Windows_SDK_v1.1\Spark1.5_Windows_SDK_v1.1\include;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule\State;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Test;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI\Task;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
