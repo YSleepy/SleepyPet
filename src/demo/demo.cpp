@@ -1,5 +1,5 @@
-#include "../include/sparkchain.h"
-#include "../include/sc_llm.h"
+#include "sparkchain.h"
+#include "sc_llm.h"
 
 #include <iostream>
 #include <string>
@@ -18,7 +18,7 @@ using namespace std;
 // async status tag
 static atomic_bool finish(false);
 // result cache
-string final_result = "";
+string final_result;
 
 
 class SparkCallbacks : public LLMCallbacks {
