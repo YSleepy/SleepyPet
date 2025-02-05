@@ -19,8 +19,7 @@ void SleepyConfig::resetFile(const QString& filePath)
 
 bool SleepyConfig::openConfig(QIODevice::OpenMode mode)
 {
-	CHECK_RETURN_RET_LOG(!file, false, "file is null");
-	if (!file) return false;
+	CHECK_RETURN_RET_LOG(file != nullptr, false, "file is null");
 	if (file->isOpen())
 	{
 		qDebug() << "File is already open!";
@@ -64,7 +63,9 @@ bool SleepyConfig::getAiConfigObj()
 
 void SleepyConfig::configADragon()
 {
-	openConfig();
+	CHECK_RETURN_LOG(openConfig(), "open file failed");
+	CHECK_RETURN_LOG(readAllToJson(), "read file failed");
+	CHECK_RETURN_LOG(getAiConfigObj(), "get ai config failed");
 }
 
 QString SleepyConfig::getAPPID()

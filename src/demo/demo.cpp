@@ -147,7 +147,7 @@ void uninitSDK()
 	// 全局逆初始化
 	SparkChain::unInit();
 }
-
+#ifdef DEMO
 int main(int argc, char const *argv[])
 {
 	system("chcp 65001");
@@ -168,3 +168,4 @@ int main(int argc, char const *argv[])
 	// 退出
 	uninitSDK();
 }
+#endif
