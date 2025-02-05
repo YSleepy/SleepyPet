@@ -361,4 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/徐登宇-SleepyPet桌面宠物打包发布
+
+!libs/Spark1.5_Windows_SDK_v1.1/libs/x64
+
+!libs/Spark1.5_Windows_SDK_v1.1/libs/x86
