@@ -36,7 +36,7 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
-    <QtInstall>6.4.3_msvc2019_64</QtInstall>
+    <QtInstall>6.8.1_msvc2022_64</QtInstall>
     <QtModules>core;gui;widgets;multimedia;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
@@ -72,7 +72,7 @@
       <AdditionalDependencies>SparkChain.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)libs\Spark1.5_Windows_SDK_v1.1\include;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\AnimationModule\State;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Test;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI;D:\Work\Project\qt_project\VS_Qt_Project\SleepyPet\src\Core\AI\Task;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)libs\Spark1.5_Windows_SDK_v1.1\include;$(SolutionDir)src\AnimationModule;$(SolutionDir)src\AnimationModule\State;$(SolutionDir)src\Test;$(SolutionDir)src\Core\AI;$(SolutionDir)src\Core\AI\Task;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
   </ItemDefinitionGroup>
