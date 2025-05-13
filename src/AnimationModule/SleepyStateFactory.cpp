@@ -2,6 +2,8 @@
 
 SleepyStateFactory& SleepyStateFactory::instance()
 {
+	// Static local variables will only be initialized once during program execution
+	// and C++11 and above standards ensure their thread safety
 	static SleepyStateFactory factory;
 	return factory;
 }
