@@ -39,3 +39,21 @@ ____________
 > 当桌面宠物从SleepIdle进入Sleep后，宠物有较长时间的睡眠时间，睡眠期间可被惊动
 惊动后，睡眠时间加长。
 
+* idle
+<img width="160" height="160" alt="image" src="https://github.com/user-attachments/assets/498c3aae-5ffa-447f-bd01-9200213a3a1e" />
+
+* walk
+<img width="160" height="160" alt="image" src="https://github.com/user-attachments/assets/69fdee24-2d2e-4257-ac79-03f3768dee61" />
+
+* drag
+<img width="159" height="161" alt="image" src="https://github.com/user-attachments/assets/8cbc0c3a-7d8e-4c24-90d8-efe31b454eed" />
+
+* fill
+<img width="160" height="163" alt="image" src="https://github.com/user-attachments/assets/1d5c09cc-642f-48da-a97e-ef81b924f7b2" />
+
+* climb
+<img width="79" height="163" alt="image" src="https://github.com/user-attachments/assets/db77dd24-a309-4ac7-ae01-067494e43bed" />
+
+* play music
+<img width="339" height="160" alt="image" src="https://github.com/user-attachments/assets/20bdb414-245a-4014-86f3-f5d1bec0be07" />
+
